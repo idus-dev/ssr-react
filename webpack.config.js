@@ -2,11 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
-const browserConfig = {
-    entry: './src/browser/index.js',
+const clientConfig = {
+    entry: './src/client/index.js',
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'bundle.js',
+        filename: 'client.js',
         publicPath: '/'
     },
     mode: 'development',
@@ -62,4 +62,4 @@ const serverConfig = {
     ]
 };
 
-module.exports = [browserConfig, serverConfig];
+module.exports = [clientConfig, serverConfig];

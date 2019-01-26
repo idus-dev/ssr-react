@@ -24,7 +24,7 @@ app.get('*', (req, res) => {
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
             <title>SSR with RR</title>
-            <script src="/bundle.js" defer></script>
+            <script src="/client.js" defer></script>
             <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
         </head>
         <body>
