@@ -3,7 +3,7 @@
 ## todos
 
 * [x] ssr with react-router 4
-* [] add polyfills & test IE9
+* [x] add polyfills & test IE9 (router test)
 * [] integrate redux
 * [] production build
 * [] containerize
