@@ -15,12 +15,13 @@
         "node": true
     },
     "globals": {
-        "__INITIAL_DATA__": true
+        "__INITIAL_DATA__": true,
+        "__isBrowser__": true
     },
     "rules": {
         "indent": ["error", 4, {"SwitchCase": 1}],
         "linebreak-style": ["error", "unix"],
-        "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+        "no-underscore-dangle": ["error", { "allow": ["_id", "__isBrowser__", "__INITIAL_DATA__"] }],
         "quotes": ["error", "single"],
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "semi": ["error", "always"]
