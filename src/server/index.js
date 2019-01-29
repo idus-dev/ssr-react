@@ -1,11 +1,15 @@
+import { createStore } from 'redux';
+import { matchPath, StaticRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { renderToString } from 'react-dom/server';
 import cors from 'cors';
 import express from 'express';
 import React from 'react';
 import serialize from 'serialize-javascript';
-import { renderToString } from 'react-dom/server';
-import { matchPath, StaticRouter } from 'react-router-dom';
-import routes from '../shared/routes';
+
 import App from '../shared/App';
+import rootReducer from '../shared/rootReducer';
+import routes from '../shared/routes';
 
 const app = express();
 
@@ -14,17 +18,21 @@ app.use(express.static('public'));
 
 app.get('*', (req, res, next) => {
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};
-
+    const store = createStore(rootReducer);
     const promise = activeRoute.fetchInitialData
         ? activeRoute.fetchInitialData(req.path)
         : Promise.resolve();
 
     promise
         .then((data) => {
+            const preloadedState = store.getState();
             const context = { data };
-            const markup = renderToString(
-                <StaticRouter location={req.url} context={context}><App /></StaticRouter>
+            const html = renderToString(
+                <Provider store={store}>
+                    <StaticRouter location={req.url} context={context}><App /></StaticRouter>
+                </Provider>
             );
+
             res.send(`
                 <!DOCTYPE html>
                 <html lang="en">
@@ -34,10 +42,10 @@ app.get('*', (req, res, next) => {
                     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
                     <title>SSR with RR</title>
                     <script src="/client.js" defer></script>
-                    <script>window.__INITIAL_DATA__ = ${serialize(data)}</script>
+                    <script> window.__PRELOADED_STATE__= ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}; window.__INITIAL_DATA__ = ${serialize(data)}</script>
                 </head>
                 <body>
-                    <div id="app">${markup}</div>
+                    <div id="app">${html}</div>
                 </body>
                 </html>
             `);
