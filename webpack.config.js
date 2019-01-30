@@ -9,7 +9,6 @@ const clientConfig = {
         filename: 'client.js',
         publicPath: '/'
     },
-    mode: 'development',
     module: {
         rules: [
             {
@@ -40,7 +39,6 @@ const serverConfig = {
         filename: 'server.js',
         publicPath: '/'
     },
-    mode: 'development',
     module: {
         rules: [
             {

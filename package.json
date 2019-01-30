@@ -11,8 +11,8 @@
     "url": "https://github.com/7ylee/ssr-react.git"
   },
   "scripts": {
-    "start": "webpack -w & nodemon server.js",
-    "lint": "eslint src"
+    "start": "webpack -w --mode development & nodemon server.js",
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
