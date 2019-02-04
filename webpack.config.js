@@ -2,7 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
-const clientConfig = {
+const client = {
+    mode: 'development',
     entry: './src/client/index.js',
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -24,13 +25,15 @@ const clientConfig = {
         ]
     },
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             __isBrowser__: 'true'
         })
     ]
 };
 
-const serverConfig = {
+const server = {
+    mode: 'development',
     entry: './src/server/index.js',
     target: 'node',
     externals: [nodeExternals()],
@@ -60,4 +63,4 @@ const serverConfig = {
     ]
 };
 
-module.exports = [clientConfig, serverConfig];
+module.exports = [client, server];

@@ -6,6 +6,6 @@
 [x] add polyfills & test IE9 (router test)
 [x] integrate redux
 [] webpack configs
+    [x] dev server & hot reload
     [] production & development configs
-    [] dev server & hot reload
 [] containerize

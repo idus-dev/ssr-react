@@ -30,3 +30,13 @@ hydrate(
     </Provider>,
     document.getElementById('app')
 );
+
+/* eslint-disable global-require */
+if (process.env.NODE_ENV === 'development') require('webpack-hot-middleware/client');
+
+if (process.env.NODE_ENV === 'development' && module.hot) {
+    module.hot.accept();
+    // module.hot.accept('./reducers', () => {
+    //     store.replaceReducer(require('./reducers').default);
+    // });
+}

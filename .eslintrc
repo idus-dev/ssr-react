@@ -19,6 +19,7 @@
         "__isBrowser__": true
     },
     "rules": {
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "indent": ["error", 4, {"SwitchCase": 1}],
         "linebreak-style": ["error", "unix"],
         "no-underscore-dangle": ["error", { "allow": ["_id", "__isBrowser__", "__INITIAL_DATA__"] }],
