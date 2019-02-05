@@ -3,7 +3,7 @@ server.js
 
 # dependencies
 /node_modules
-
+/.tmp
 # testing
 /coverage
 

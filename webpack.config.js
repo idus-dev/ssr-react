@@ -4,7 +4,10 @@ const nodeExternals = require('webpack-node-externals');
 
 const client = {
     mode: 'development',
-    entry: './src/client/index.js',
+    entry: [
+        'webpack-hot-middleware/client',
+        './src/client/index.js'
+    ],
     output: {
         path: path.resolve(__dirname, 'public'),
         filename: 'client.js',
@@ -34,7 +37,10 @@ const client = {
 
 const server = {
     mode: 'development',
-    entry: './src/server/index.js',
+    entry: [
+        'webpack-hot-middleware/client',
+        './src/server/index.js'
+    ],
     target: 'node',
     externals: [nodeExternals()],
     output: {
