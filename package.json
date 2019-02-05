@@ -15,7 +15,8 @@
     "url": "https://github.com/7ylee/ssr-react.git"
   },
   "scripts": {
-    "start": "babel-node server.js",
+    "start": "webpack -w & babel-node server.js",
+    "build": "rm -rf ./dist && webpack --config webpack.prod.js",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -50,6 +51,8 @@
     "prettier": "^1.16.1",
     "redux-devtools-extension": "^2.13.7",
     "webpack": "^4.26.0",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "^3.2.1",
     "webpack-dev-middleware": "^3.5.1",
     "webpack-hot-middleware": "^2.24.3",
     "webpack-node-externals": "^1.7.2"

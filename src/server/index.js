@@ -12,6 +12,7 @@ import App from '../shared/App';
 import rootReducer from '../shared/rootReducer';
 import routes from '../shared/routes';
 
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 /* eslint-disable global-require */
@@ -77,4 +78,4 @@ app.get('*', (req, res, next) => {
 });
 
 /* eslint-disable no-console */
-app.listen(3000, () => console.log('listening on 3000'));
+app.listen(PORT, () => console.log(`listening on ${PORT}`));
