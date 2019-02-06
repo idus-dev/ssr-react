@@ -59,6 +59,15 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-node-externals": "^1.7.2"
   },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  },
   "browserslist": [
     "last 1 version",
     "> 1%",

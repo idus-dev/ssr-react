@@ -27,16 +27,7 @@ const client = {
                 test: /\.m?js$/,
                 exclude: /(node_modules)/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env',
-                            '@babel/react'
-                        ],
-                        plugins: [
-                            '@babel/plugin-proposal-object-rest-spread'
-                        ]
-                    }
+                    loader: 'babel-loader'
                 }
             },
         ]
@@ -74,16 +65,7 @@ const server = {
                 test: /\.m?js$/,
                 exclude: /(node_modules)/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env',
-                            '@babel/react'
-                        ],
-                        plugins: [
-                            '@babel/plugin-proposal-object-rest-spread'
-                        ]
-                    }
+                    loader: 'babel-loader'
                 }
             }
         ]
