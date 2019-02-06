@@ -1,15 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     mode: 'development',
-    entry: [
-        '@babel/polyfill',
-        './src/client/index.js'
-    ],
+    entry: './src/server/index.js',
+    target: 'node',
     output: {
-        path: path.resolve(__dirname, 'public'),
-        filename: 'client.js',
+        path: path.resolve(__dirname, 'dev'),
+        filename: 'server.js',
         publicPath: '/'
     },
     module: {
@@ -23,13 +22,13 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
-            },
+            }
         ]
     },
+    externals: [nodeExternals()],
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
-            __isBrowser__: 'true'
+            __isBrowser__: 'false'
         })
     ]
 };

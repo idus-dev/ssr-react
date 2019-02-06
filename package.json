@@ -15,8 +15,10 @@
     "url": "https://github.com/7ylee/ssr-react.git"
   },
   "scripts": {
-    "start": "babel-node server.js",
-    "build": "rm -rf ./dist && webpack --config webpack.prod.js",
+    "dev:client": "npm run build:server && node ./dev/server.js",
+    "dev:server": "webpack --mode production --config webpack.server.js & nodemon ./dev/server.js",
+    "build:server": "webpack --mode development --config webpack.server.js",
+    "production": "webpack --config webpack.prod.js",
     "lint": "eslint src"
   },
   "dependencies": {
@@ -36,13 +38,11 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.1.6",
-    "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
-    "chokidar": "^2.0.4",
     "eslint": "^5.12.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",

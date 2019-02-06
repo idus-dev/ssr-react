@@ -50,7 +50,7 @@ class Grid extends Component {
     render() {
         const { repos, loading } = this.state;
 
-        if (loading) return <h1>loading</h1>;
+        if (loading) return <h1>loading stuff...</h1>;
 
         return (
             <ul style={{ display: 'flex', flexWrap: 'wrap' }}>

@@ -1,5 +1,4 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
-server.js
 
 # dependencies
 /node_modules
@@ -11,6 +10,7 @@ server.js
 /build
 /public
 /dist
+/dev
 
 # misc
 .DS_Store

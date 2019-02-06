@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import { BrowserRouter } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, applyMiddleware } from 'redux';
@@ -31,12 +30,13 @@ hydrate(
     document.getElementById('app')
 );
 
-/* eslint-disable global-require */
-if (process.env.NODE_ENV === 'development') require('webpack-hot-middleware/client');
-
-if (process.env.NODE_ENV === 'development' && module.hot) {
-    module.hot.accept();
-    // module.hot.accept('./reducers', () => {
-    //     store.replaceReducer(require('./reducers').default);
-    // });
+if (process.env.NODE_ENV === 'development') {
+    /* eslint-disable global-require */
+    require('webpack-hot-middleware/client');
+    if (module.hot) {
+        module.hot.accept();
+        // module.hot.accept('./reducers', () => {
+        //     store.replaceReducer(require('./reducers').default);
+        // });
+    }
 }

@@ -2,7 +2,6 @@ import { createStore } from 'redux';
 import { matchPath, StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
-import webpack from 'webpack';
 import cors from 'cors';
 import express from 'express';
 import React from 'react';
@@ -17,13 +16,13 @@ const app = express();
 
 /* eslint-disable global-require */
 if (process.env.NODE_ENV === 'development') {
+    const webpack = require('webpack');
     const config = require('../../webpack.config');
-
-    const compiler = webpack(config[0]);
+    const compiler = webpack(config);
 
     app.use(require('webpack-dev-middleware')(compiler, {
         noInfo: true,
-        publicPath: config[0].output.publicPath,
+        publicPath: config.output.publicPath,
         stats: {
             assets: false,
             colors: true,
@@ -36,6 +35,8 @@ if (process.env.NODE_ENV === 'development') {
     }));
     app.use(require('webpack-hot-middleware')(compiler));
 }
+
+console.log('131313');
 
 app.use(cors());
 app.use(express.static('public'));
@@ -78,4 +79,4 @@ app.get('*', (req, res, next) => {
 });
 
 /* eslint-disable no-console */
-app.listen(PORT, () => console.log(`listening on ${PORT}`));
+app.listen(PORT, () => console.log(`listening on ${PORT} NODE_ENV="${process.env.NODE_ENV}"`));
