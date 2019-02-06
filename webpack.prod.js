@@ -1,11 +1,12 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const client = {
     mode: 'production',
-    entry: './src/client/index.js',
+    entry: ['./src/client/index.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[hash].bundle.js',
@@ -28,7 +29,13 @@ const client = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: [
+                            '@babel/preset-env',
+                            '@babel/react'
+                        ],
+                        plugins: [
+                            '@babel/plugin-proposal-object-rest-spread'
+                        ]
                     }
                 }
             },
@@ -36,13 +43,24 @@ const client = {
     },
     plugins: [
         new BundleAnalyzerPlugin({ analyzerMode: 'none' }), // static
-        new webpack.DefinePlugin({ __isBrowser__: 'true' })
+        new webpack.DefinePlugin({ __isBrowser__: 'true' }),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            minify: {
+                collapseWhitespace: true,
+                removeComments: true,
+                removeRedundantAttributes: true,
+                removeScriptTypeAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                useShortDoctype: true
+            }
+        })
     ]
 };
 
 const server = {
     mode: 'production',
-    entry: './src/server/index.js',
+    entry: ['./src/server/index.js'],
     target: 'node',
     externals: [nodeExternals()],
     output: {
@@ -58,7 +76,13 @@ const server = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: [
+                            '@babel/preset-env',
+                            '@babel/react'
+                        ],
+                        plugins: [
+                            '@babel/plugin-proposal-object-rest-spread'
+                        ]
                     }
                 }
             }

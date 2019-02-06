@@ -3,10 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
     mode: 'development',
-    entry: [
-        '@babel/polyfill',
-        './src/client/index.js'
-    ],
+    entry: './src/client/index.js',
     output: {
         path: path.resolve(__dirname, 'public'),
         filename: 'client.js',

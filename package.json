@@ -15,14 +15,12 @@
     "url": "https://github.com/7ylee/ssr-react.git"
   },
   "scripts": {
-    "dev:client": "npm run build:server && node ./dev/server.js",
+    "dev:client": "webpack --config webpack.server.js && node ./dev/server.js",
     "dev:server": "webpack -w --mode none --config webpack.server.js & nodemon ./dev/server.js",
-    "build:server": "webpack --mode development --config webpack.server.js",
-    "production": "webpack --config webpack.prod.js",
+    "build": "rm -rf ./dist && webpack --config webpack.prod.js",
     "lint": "eslint src"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.2.5",
     "axios": "^0.18.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
