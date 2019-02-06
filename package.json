@@ -16,7 +16,7 @@
   },
   "scripts": {
     "dev:client": "npm run build:server && node ./dev/server.js",
-    "dev:server": "webpack --mode production --config webpack.server.js & nodemon ./dev/server.js",
+    "dev:server": "webpack --mode production --config webpack.server.js -w & nodemon ./dev/server.js",
     "build:server": "webpack --mode development --config webpack.server.js",
     "production": "webpack --config webpack.prod.js",
     "lint": "eslint src"
