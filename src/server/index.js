@@ -36,8 +36,6 @@ if (process.env.NODE_ENV === 'development') {
     app.use(require('webpack-hot-middleware')(compiler));
 }
 
-console.log('131313');
-
 app.use(cors());
 app.use(express.static('public'));
 

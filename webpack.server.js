@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-    mode: 'development',
+    mode: 'none',
     entry: './src/server/index.js',
     target: 'node',
     output: {
@@ -19,7 +19,13 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: [
+                            '@babel/preset-env',
+                            '@babel/react'
+                        ],
+                        plugins: [
+                            '@babel/plugin-proposal-object-rest-spread'
+                        ]
                     }
                 }
             }
