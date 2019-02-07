@@ -1,11 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
     entry: './src/client/index.js',
     output: {
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'dev'),
         filename: 'client.js',
         publicPath: '/'
     },
@@ -24,6 +25,9 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             __isBrowser__: 'true'
+        }),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
         })
     ]
 };
