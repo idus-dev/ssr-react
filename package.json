@@ -18,7 +18,7 @@
     "dev:client": "webpack --config webpack.server.js && node ./dev/server.js",
     "dev:server": "webpack -w --mode none --config webpack.server.js & nodemon ./dev/server.js",
     "build": "rm -rf ./dist && webpack --config webpack.prod.js",
-    "build:client": "webpack --config webpack.config",
+    "build:client": "webpack --mode none --config webpack.config",
     "lint": "eslint src"
   },
   "dependencies": {

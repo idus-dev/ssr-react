@@ -6,7 +6,7 @@ module.exports = {
     mode: 'development',
     entry: './src/client/index.js',
     output: {
-        path: path.resolve(__dirname, 'dev'),
+        path: path.resolve(__dirname, 'public'),
         filename: 'client.js',
         publicPath: '/'
     },
@@ -28,6 +28,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
+            filename: 'template.html'
         })
     ]
 };
