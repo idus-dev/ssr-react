@@ -18,7 +18,7 @@ const client = {
             chunks: 'all'
         },
         runtimeChunk: {
-            name: 'manifest'
+            name: entrypoint => `runtime~${entrypoint.name}`
         }
     },
     module: {
@@ -33,7 +33,7 @@ const client = {
         ]
     },
     plugins: [
-        new BundleAnalyzerPlugin({ analyzerMode: 'none' }), // static
+        new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
         new webpack.DefinePlugin({ __isBrowser__: 'true' }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',

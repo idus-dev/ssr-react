@@ -7,6 +7,7 @@
 - [x] redux
 - [x] styled-components
 - [ ] react-helmet
+- [ ] pwa
 - [x] webpack: dev server & hot reload
 - [ ] webpack: production & development configs
 - [ ] docker container
