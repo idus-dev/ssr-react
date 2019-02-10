@@ -69,7 +69,12 @@
     ],
     "plugins": [
       "@babel/plugin-proposal-object-rest-spread",
-      ["styled-components", { "ssr": true } ]
+      [
+        "styled-components",
+        {
+          "ssr": true
+        }
+      ]
     ]
   },
   "browserslist": [
