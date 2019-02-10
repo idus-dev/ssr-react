@@ -14,13 +14,21 @@ export default (store, data) => (req, res) => {
     const context = { data };
     const html = renderToString(
         <Provider store={store}>
-            <StaticRouter location={req.url ? req.url : '/'} context={context}><App /></StaticRouter>
+            <StaticRouter location={req.url} context={context}><App /></StaticRouter>
         </Provider>
     );
 
     fs.readFile(filePath, 'utf8', (err, htmlData) => {
         if (err) {
             return res.status(404).end();
+        }
+
+        // context.url will contain the URL to redirect to if a <Redirect> was used
+        if (context.url) {
+            console.log(context.url);
+            return res.writeHead(302, {
+                Location: context.url
+            });
         }
 
         return res.send(

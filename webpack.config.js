@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: 'development',
     entry: './src/client/index.js',
+    devtool: 'eval',
     output: {
         path: path.resolve(__dirname, 'public'),
         filename: 'client.js',

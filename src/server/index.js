@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(cors());
 app.use(express.static('public'));
 
-app.use('*', (req, res, next) => {
+app.get('*', (req, res, next) => {
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};
     const store = createStore(rootReducer);
     const promise = activeRoute.fetchInitialData

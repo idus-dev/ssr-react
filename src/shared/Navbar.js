@@ -1,5 +1,24 @@
 import React from 'react';
+import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+
+const LinkStyle = styled(NavLink)`
+    color: #999;
+`;
+
+const NavStyle = styled.nav`
+    padding: 0;
+    margin: 0;
+
+    > ${LinkStyle} {
+        display: inline-block;
+        margin: 0 10px;
+    }
+
+    .active {
+        color: red
+    }
+`;
 
 const Navbar = () => {
     const languages = [{
@@ -14,13 +33,11 @@ const Navbar = () => {
     }];
 
     return (
-        <ul>
+        <NavStyle>
             {languages.map(({ name, param }) => (
-                <li key={param}>
-                    <NavLink to={`/popular/${param}`}>{name}</NavLink>
-                </li>
+                <LinkStyle key={param} to={`/popular/${param}`}>{name}</LinkStyle>
             ))}
-        </ul>
+        </NavStyle>
     );
 };
 
