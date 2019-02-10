@@ -1,11 +1,12 @@
-# build everything from scratch
+# SSR with
 
-## todos
+## TODOS
 
-* [x] ssr with react-router 4
-* [x] add polyfills & test IE9 (router test)
-* [x] integrate redux
-* [] webpack configs
-  * [x] dev server & hot reload
-  * [] production & development configs
-* [] containerize
+- [x] react-router
+- [x] add polyfills & test IE9 (router test)
+- [x] redux
+- [x] styled-components
+- [ ] react-helmet
+- [x] webpack: dev server & hot reload
+- [ ] webpack: production & development configs
+- [ ] docker container
