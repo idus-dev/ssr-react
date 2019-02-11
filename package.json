@@ -15,12 +15,11 @@
     "url": "https://github.com/7ylee/ssr-react.git"
   },
   "scripts": {
-    "build:client": "webpack --mode none --config webpack.config",
-    "dev:client": "webpack --config webpack.server.js && node ./dev/server.js",
-    "dev:server": "webpack -w --mode none --config webpack.server.js & nodemon ./dev/server.js",
     "lint": "eslint src",
+    "dev:client": "webpack --config webpack.config.js && node ./dev/server.js",
+    "dev:server": "webpack -w --mode none --config webpack.config.js & nodemon ./dev/server.js",
     "build": "rm -rf ./dist && webpack --config webpack.prod.js",
-    "start": "npm run build && node dist/server.js"
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

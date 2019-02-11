@@ -16,11 +16,11 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
     const webpack = require('webpack');
     const config = require('../../webpack.config');
-    const compiler = webpack(config);
+    const compiler = webpack(config[0]);
 
     app.use(require('webpack-dev-middleware')(compiler, {
         noInfo: true,
-        publicPath: config.output.publicPath,
+        publicPath: config[0].output.publicPath,
         stats: {
             assets: false,
             colors: true,
