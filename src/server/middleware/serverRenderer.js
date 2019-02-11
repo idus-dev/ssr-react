@@ -3,14 +3,15 @@ import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { StaticRouter } from 'react-router-dom';
 import fs from 'fs';
-import path from 'path';
 import React from 'react';
 import serialize from 'serialize-javascript';
 
 import App from '../../shared/App';
 
+const templatePath = process.env.NODE_ENV === 'production' ? 'dist' : 'dev';
+
 export default (store, data) => (req, res) => {
-    const filePath = process.env.NODE_ENV === 'production' ? path.resolve(__dirname, 'template.html') : './public/template.html';
+    const filePath = `./${templatePath}/template.html`;
     const sheet = new ServerStyleSheet();
     const preloadedState = store.getState();
     const context = { data };
@@ -29,7 +30,6 @@ export default (store, data) => (req, res) => {
 
         // context.url will contain the URL to redirect to if a <Redirect> was used
         if (context.url) {
-            console.log(context.url);
             return res.writeHead(302, {
                 Location: context.url
             });

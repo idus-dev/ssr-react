@@ -7,7 +7,9 @@ import serverRenderer from './middleware/serverRenderer';
 import rootReducer from '../shared/rootReducer';
 import routes from '../shared/routes';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.NODE_ENV === 'production' ? 8080 : 3000;
+const STATIC = process.env.NODE_ENV === 'production' ? 'dist' : 'dev';
+
 const app = express();
 
 /* eslint-disable global-require */
@@ -33,7 +35,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(cors());
-app.use(express.static('public'));
+app.use(express.static(STATIC));
 
 app.get('*', (req, res, next) => {
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};

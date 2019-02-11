@@ -6,7 +6,7 @@ const nodeExternals = require('webpack-node-externals');
 
 const client = {
     mode: 'production',
-    entry: ['./src/client/index.js'],
+    entry: './src/client/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[hash].bundle.js',
@@ -33,10 +33,11 @@ const client = {
         ]
     },
     plugins: [
-        new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
+        new BundleAnalyzerPlugin({ analyzerMode: 'none' }),
         new webpack.DefinePlugin({ __isBrowser__: 'true' }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
+            filename: 'template.html',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true,
@@ -51,7 +52,7 @@ const client = {
 
 const server = {
     mode: 'production',
-    entry: ['./src/server/index.js'],
+    entry: './src/server/index.js',
     target: 'node',
     externals: [nodeExternals()],
     output: {

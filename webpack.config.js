@@ -7,8 +7,8 @@ module.exports = {
     entry: './src/client/index.js',
     devtool: 'eval',
     output: {
-        path: path.resolve(__dirname, 'public'),
-        filename: 'client.js',
+        path: path.resolve(__dirname, 'dev'),
+        filename: 'bundle.js',
         publicPath: '/'
     },
     module: {

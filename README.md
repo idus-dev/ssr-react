@@ -9,5 +9,5 @@
 - [ ] react-helmet
 - [ ] pwa
 - [x] webpack: dev server & hot reload
-- [ ] webpack: production & development configs
+- [x] webpack: production & development configs
 - [ ] docker container
