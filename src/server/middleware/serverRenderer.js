@@ -2,6 +2,7 @@ import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { StaticRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import fs from 'fs';
 import React from 'react';
 import serialize from 'serialize-javascript';
@@ -12,9 +13,10 @@ const templatePath = process.env.NODE_ENV === 'production' ? 'dist' : 'dev';
 
 export default (store, data) => (req, res) => {
     const filePath = `./${templatePath}/template.html`;
-    const sheet = new ServerStyleSheet();
     const preloadedState = store.getState();
     const context = { data };
+    const sheet = new ServerStyleSheet();
+    const helmet = Helmet.renderStatic();
     const html = renderToString(
         sheet.collectStyles(
             <Provider store={store}>
@@ -37,7 +39,8 @@ export default (store, data) => (req, res) => {
 
         return res.send(
             htmlData
-                .replace('<style></style>', `<style>${sheet.getStyleTags()}</style>`)
+                .replace('<title></title>', helmet.title.toString())
+                .replace('<style></style>', sheet.getStyleTags())
                 .replace('__PRELOADED_STATE__={}', `__PRELOADED_STATE__=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}`)
                 .replace('__INITIAL_DATA__={}', `__INITIAL_DATA__=${serialize(data)}`)
                 .replace('<div id="app"></div>', `<div id="app">${html}</div>`)

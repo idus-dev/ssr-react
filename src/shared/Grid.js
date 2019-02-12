@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Helmet } from 'react-helmet';
+
 import PropTypes from 'prop-types';
 
 /* eslint-disable  camelcase */
@@ -49,11 +51,23 @@ class Grid extends Component {
 
     render() {
         const { repos, loading } = this.state;
+        const { match } = this.props;
 
-        if (loading) return <h1>loading stuff...</h1>;
+        if (loading) return (
+            <div>
+                <h1>loading stuff...</h1>
+                <Helmet>
+                    <title>My App | {loading && 'loading...'}</title>
+                </Helmet>
+            </div>
+        );
 
         return (
             <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
+                <Helmet>
+                    <title>My App | {match.params.id}</title>
+                    <meta name="description" content="Helmet Grid" />
+                </Helmet>
                 {repos.map(({ name, owner, stargazers_count, html_url }) => (
                     <li key={name} style={{ margin: 30 }}>
                         <ul>
