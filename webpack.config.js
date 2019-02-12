@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const client = {
     mode: 'development',
@@ -31,6 +32,21 @@ const client = {
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             filename: 'template.html'
+        }),
+        new WebpackPwaManifest({
+            inject: true,
+            fingerprints: false,
+            name: 'SSR-React',
+            short_name: 'SSR',
+            description: 'My awesome Progressive Web App!',
+            background_color: '#ffffff',
+            display: 'standalone',
+            icons: [
+                {
+                    src: path.resolve('src/assets/icon.png'),
+                    sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+                }
+            ]
         })
     ]
 };

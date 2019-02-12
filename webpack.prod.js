@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const client = {
     mode: 'production',
@@ -33,7 +34,7 @@ const client = {
         ]
     },
     plugins: [
-        new BundleAnalyzerPlugin({ analyzerMode: 'static' }),
+        new BundleAnalyzerPlugin({ analyzerMode: 'none' }),
         new webpack.DefinePlugin({ __isBrowser__: 'true' }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
@@ -46,6 +47,20 @@ const client = {
                 removeStyleLinkTypeAttributes: true,
                 useShortDoctype: true
             }
+        }),
+        new WebpackPwaManifest({
+            inject: true,
+            name: 'SSR-React',
+            short_name: 'SSR',
+            description: 'My awesome Progressive Web App!',
+            background_color: '#ffffff',
+            display: 'standalone',
+            icons: [
+                {
+                    src: path.resolve('src/assets/icon.png'),
+                    sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+                }
+            ]
         })
     ]
 };
