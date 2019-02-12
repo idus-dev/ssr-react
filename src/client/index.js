@@ -2,6 +2,7 @@
 import 'core-js/fn/set';
 import 'core-js/fn/promise';
 import 'core-js/es6/map';
+import './index.css';
 
 import { BrowserRouter } from 'react-router-dom';
 import { composeWithDevTools } from 'redux-devtools-extension';
