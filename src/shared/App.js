@@ -1,11 +1,14 @@
-import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import routes from './routes';
-import NoMatch from './NoMatch';
+import React from 'react';
+
 import Navbar from './Navbar';
+import NoMatch from './NoMatch';
+import routes from './routes';
+import NormalizeStyle from '../client/NormalizeStyle';
 
 const App = () => (
     <div>
+        <NormalizeStyle />
         <Navbar />
         <Switch>
             {routes.map(({ path, exact, component: C, ...rest }) => (

@@ -2,12 +2,28 @@
 
 ## TODOS
 
-- [x] react-router
-- [x] add polyfills & test IE9 (router test)
-- [x] redux
-- [x] styled-components
-- [ ] react-helmet
-- [ ] pwa
 - [x] webpack: dev server & hot reload
 - [x] webpack: production & development configs
-- [ ] docker container
+- [x] react-router
+- [x] redux (thunk, devtool)
+- [x] styled-components (no css)
+- [ ] react-loadable
+- [ ] react-helmet
+- [ ] pwa - manifest.json & serviceworker.js
+- [x] docker container
+- [x] add polyfills & support IE9
+- [ ] testing jest & enzyme
+
+## Docker (production)
+
+build image
+
+``` shell
+docker build -t 7ylee/ssr_react .
+```
+
+run image
+
+``` shell
+docker run -p ${PORT}:8080 --name ssr_react -d 7ylee/ssr_react
+```
