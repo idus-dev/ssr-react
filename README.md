@@ -19,11 +19,11 @@
 build image
 
 ``` shell
-docker build -t 7ylee/ssr_react .
+docker build -t 7ylee/ssr-react .
 ```
 
 run image
 
 ``` shell
-docker run -p ${PORT}:8080 --name ssr_react -d 7ylee/ssr_react
+docker run -p ${PORT}:8080 --name ssr-react -d 7ylee/ssr-react
 ```
