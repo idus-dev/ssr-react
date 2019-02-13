@@ -35,16 +35,19 @@ const client = {
         }),
         new WebpackPwaManifest({
             inject: true,
-            fingerprints: false,
+            ios: true,
             name: 'SSR-React',
             short_name: 'SSR',
             description: 'My awesome Progressive Web App!',
-            background_color: '#ffffff',
+            background_color: '#dd5850',
+            theme_color: '#dd5850',
             display: 'standalone',
             icons: [
                 {
                     src: path.resolve('src/assets/icon.png'),
-                    sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+                    sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+                    destination: path.join('icons', 'ios'),
+                    ios: true
                 }
             ]
         })
