@@ -1,10 +1,10 @@
 import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 
-import Navbar from './Navbar';
-import NoMatch from './NoMatch';
+import Navbar from './components/Navbar';
+import NoMatch from './pages/NoMatch';
 import routes from './routes';
-import NormalizeStyle from '../client/NormalizeStyle';
+import NormalizeStyle from './components/NormalizeStyle';
 
 const App = () => (
     <div>

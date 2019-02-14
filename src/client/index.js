@@ -14,8 +14,8 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import thunk from 'redux-thunk';
 
-import App from '../shared/App';
-import rootReducer from '../shared/rootReducer';
+import App from './App';
+import rootReducer from './reducers/rootReducer';
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;

@@ -7,9 +7,11 @@ import fs from 'fs';
 import React from 'react';
 import serialize from 'serialize-javascript';
 
-import App from '../../shared/App';
+import App from '../../client/App';
 
-const templatePath = process.env.NODE_ENV === 'production' ? 'dist' : 'dev';
+const templatePath = process.env.NODE_ENV === 'production'
+    ? 'dist'
+    : 'dev';
 
 export default (store, data) => (req, res) => {
     const filePath = `./${templatePath}/template.html`;

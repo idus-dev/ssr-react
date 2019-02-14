@@ -1,14 +1,18 @@
-import { createStore } from 'redux';
 import { matchPath } from 'react-router-dom';
 import cors from 'cors';
 import express from 'express';
 
-import serverRenderer from './middleware/serverRenderer';
-import rootReducer from '../shared/rootReducer';
-import routes from '../shared/routes';
+import renderer from './middleware/renderer';
+import storeHandler from './middleware/storeHandler';
+import routes from '../client/routes';
 
-const PORT = process.env.NODE_ENV === 'production' ? 8080 : 3000;
-const STATIC = process.env.NODE_ENV === 'production' ? 'dist' : 'dev';
+const STATIC = process.env.NODE_ENV === 'production'
+    ? 'dist'
+    : 'dev';
+
+const PORT = process.env.NODE_ENV === 'production'
+    ? 8080
+    : 3000;
 
 const app = express();
 
@@ -39,13 +43,13 @@ app.use(express.static(STATIC));
 
 app.get('*', (req, res, next) => {
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};
-    const store = createStore(rootReducer);
-    const promise = activeRoute.fetchInitialData
+    const store = storeHandler(req);
+    const fetchInitial = activeRoute.fetchInitialData
         ? activeRoute.fetchInitialData(req.path)
         : Promise.resolve();
 
-    promise
-        .then(data => serverRenderer(store, data)(req, res))
+    fetchInitial
+        .then(data => renderer(store, data)(req, res))
         .catch(next);
 });
 

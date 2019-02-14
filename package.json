@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint": "eslint src",
-    "dev:client": "webpack --config webpack.config.js && node ./dev/server.js",
+    "dev:client": "rm -rf ./dev && webpack --config webpack.config.js && node ./dev/server.js",
     "dev:server": "webpack -w --mode none --config webpack.config.js & nodemon ./dev/server.js",
     "build": "rm -rf ./dist && webpack --config webpack.prod.js",
     "start": "node dist/server.js"
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
@@ -71,6 +72,7 @@
     ],
     "plugins": [
       "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-class-properties",
       [
         "styled-components",
         {

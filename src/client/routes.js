@@ -1,5 +1,5 @@
-import Home from './Home';
-import Grid from './Grid';
+import Home from './pages/Home';
+import Grid from './pages/Grid';
 import fetchPopularReops from './api';
 
 const routes = [
