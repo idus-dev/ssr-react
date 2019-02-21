@@ -4,7 +4,9 @@ import React from 'react';
 import Navigation from './components/Navigation';
 import NoMatch from './pages/NoMatch';
 import routes from './routes';
-import { NormalizeStyle, FontStyle } from './components/GlobalStyles';
+import { NormalizeStyle, FontStyle, BgImage } from './components/GlobalStyles';
+
+import icon from '../assets/icon.png';
 
 const App = () => (
     <div>
@@ -12,6 +14,10 @@ const App = () => (
         <FontStyle />
 
         <Navigation />
+
+        <img src={icon} alt="" />
+        <BgImage />
+
         <Switch>
             {routes.map(({ path, exact, component: C, ...rest }) => (
                 <Route key={path}

@@ -21,6 +21,10 @@ const client = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: 'file-loader?name=./assets/images/[name].[ext]'
             }
         ]
     },
@@ -71,6 +75,10 @@ const server = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: 'file-loader?name=./assets/images/[name].[ext]'
             }
         ]
     },
