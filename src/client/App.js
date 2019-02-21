@@ -1,15 +1,17 @@
 import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 
-import Navbar from './components/Navbar';
+import Navigation from './components/Navigation';
 import NoMatch from './pages/NoMatch';
 import routes from './routes';
-import NormalizeStyle from './components/NormalizeStyle';
+import { NormalizeStyle, FontStyle } from './components/GlobalStyles';
 
 const App = () => (
     <div>
         <NormalizeStyle />
-        <Navbar />
+        <FontStyle />
+
+        <Navigation />
         <Switch>
             {routes.map(({ path, exact, component: C, ...rest }) => (
                 <Route key={path}

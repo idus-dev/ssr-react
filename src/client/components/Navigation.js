@@ -20,7 +20,7 @@ const NavStyle = styled.nav`
     }
 `;
 
-const Navbar = () => {
+const Navigation = () => {
     const languages = [{
         name: 'All',
         param: 'all'
@@ -41,4 +41,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default Navigation;

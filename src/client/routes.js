@@ -1,6 +1,6 @@
 import Home from './pages/Home';
 import Grid from './pages/Grid';
-import fetchPopularReops from './api';
+import fetchPopularRepos from './api';
 
 const routes = [
     {
@@ -12,7 +12,7 @@ const routes = [
         path: '/popular/:id',
         exact: true,
         component: Grid,
-        fetchInitialData: (path = '') => fetchPopularReops(path.split('/').pop())
+        fetchInitialData: (path = '') => fetchPopularRepos(path.split('/').pop())
     }
 ];
 
