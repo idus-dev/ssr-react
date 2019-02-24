@@ -9,7 +9,7 @@
 - [x] styled-components (no css)
 - [ ] react-loadable
 - [x] react-helmet
-- [ ] pwa - manifest.json & serviceworker.js
+- [x] pwa - manifest.json & serviceworker.js
 - [x] docker container
 - [x] add polyfills & support IE9
 - [ ] testing jest & enzyme

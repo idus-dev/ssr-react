@@ -1,7 +1,8 @@
-const path = require('path');
-const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
+const path = require('path');
+const OfflinePlugin = require('offline-plugin');
+const webpack = require('webpack');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const client = {
@@ -37,6 +38,7 @@ const client = {
             template: 'src/index.html',
             filename: 'template.html'
         }),
+        new OfflinePlugin(),
         new WebpackPwaManifest({
             inject: true,
             ios: true,

@@ -6,7 +6,6 @@ export default (req) => {
     const preloadedState = {};
     const { url } = req;
 
-    console.log(url);
     // handle preloaded state here
     return createStore(rootReducer, preloadedState);
 };
