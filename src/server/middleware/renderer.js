@@ -14,7 +14,7 @@ const templatePath = process.env.NODE_ENV === 'production'
     : 'dev';
 
 export default (store, data) => (req, res) => {
-    const filePath = `./${templatePath}/template.html`;
+    const filePath = `./${templatePath}/app-shell.html`;
     const preloadedState = store.getState();
     const context = { data };
     const sheet = new ServerStyleSheet();

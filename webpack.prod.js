@@ -42,8 +42,8 @@ const client = {
         new BundleAnalyzerPlugin({ analyzerMode: 'none' }),
         new webpack.DefinePlugin({ __isBrowser__: 'true' }),
         new HtmlWebpackPlugin({
-            template: 'src/index.html',
-            filename: 'template.html',
+            template: 'src/app-shell.html',
+            filename: 'app-shell.html',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true,
@@ -53,7 +53,6 @@ const client = {
                 useShortDoctype: true
             }
         }),
-        new OfflinePlugin(),
         new WebpackPwaManifest({
             inject: true,
             ios: true,
@@ -71,6 +70,9 @@ const client = {
                     ios: true
                 }
             ]
+        }),
+        new OfflinePlugin({
+            appShell: '/app-shell.html'
         })
     ]
 };

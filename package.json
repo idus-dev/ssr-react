@@ -8,7 +8,7 @@
     "react"
   ],
   "author": "tylee",
-  "main": "index.html",
+  "main": "app-shell.html",
   "license": "MIT",
   "repository": {
     "type": "git",
