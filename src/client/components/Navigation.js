@@ -22,20 +22,17 @@ const NavStyle = styled.nav`
 
 const Navigation = () => {
     const languages = [{
-        name: 'All',
-        param: 'all'
+        name: 'Main',
+        param: ''
     }, {
-        name: 'Javascript',
-        param: 'javascript'
-    }, {
-        name: 'Python',
-        param: 'python'
+        name: 'Message',
+        param: 'message'
     }];
 
     return (
         <NavStyle>
             {languages.map(({ name, param }) => (
-                <LinkStyle key={param} to={`/popular/${param}`}>{name}</LinkStyle>
+                <LinkStyle key={param} to={`/${param}`}>{name}</LinkStyle>
             ))}
         </NavStyle>
     );

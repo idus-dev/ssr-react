@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-export default function fetchPopularRepos(language = 'all') {
-    const encodedURI = `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`;
+// export default function fetchPopularRepos(language = 'all') {
+//     const encodedURI = `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`;
 
-    return axios.get(encodedURI).then(res => res.data.items);
-}
+//     return axios.get(encodedURI).then(res => res.data.items);
+// }
+
+export default {
+    message: () => axios.get('/api/notification').then(res => res.data),
+};

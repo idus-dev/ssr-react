@@ -2,22 +2,16 @@ import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 
 import Navigation from './components/Navigation';
+import Notification from './components/Notification';
 import NoMatch from './pages/NoMatch';
 import routes from './routes';
-import { NormalizeStyle, FontStyle, BgImage } from './components/GlobalStyles';
-
-import icon from '../assets/icon.png';
+import { NormalizeStyle } from './components/GlobalStyles';
 
 const App = () => (
-    <div>
+    <main>
         <NormalizeStyle />
-        <FontStyle />
-
+        <Notification />
         <Navigation />
-
-        <img src={icon} alt="" />
-        <BgImage />
-
         <Switch>
             {routes.map(({ path, exact, component: C, ...rest }) => (
                 <Route key={path}
@@ -28,7 +22,7 @@ const App = () => (
             ))}
             <Route render={props => <NoMatch {...props} />} />
         </Switch>
-    </div>
+    </main>
 );
 
 export default App;

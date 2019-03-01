@@ -2,9 +2,16 @@ import { createStore } from 'redux';
 
 import rootReducer from '../../client/reducers/rootReducer';
 
-export default (req) => {
+export default () => {
     const preloadedState = {};
-    const { url } = req;
+
+    // set initial state from server
+    preloadedState.counter = 5;
+
+    preloadedState.notification = {
+        timestamp: 123122,
+        message: 'before rendering'
+    };
 
     // handle preloaded state here
     return createStore(rootReducer, preloadedState);

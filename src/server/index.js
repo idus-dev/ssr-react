@@ -6,6 +6,8 @@ import renderer from './middleware/renderer';
 import storeHandler from './middleware/storeHandler';
 import routes from '../client/routes';
 
+import routerNotification from './routes/notification';
+
 const STATIC = process.env.NODE_ENV === 'production'
     ? 'dist'
     : 'dev';
@@ -40,6 +42,9 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(cors());
 app.use(express.static(STATIC));
+
+// internal api endpoints
+app.use('/api/notification', routerNotification);
 
 app.get('*', (req, res, next) => {
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};

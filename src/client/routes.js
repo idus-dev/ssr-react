@@ -1,19 +1,24 @@
-import Home from './pages/Home';
-import Grid from './pages/Grid';
-import fetchPopularRepos from './api';
+import Main from './pages/Main';
+import Message from './pages/Message';
+// import fetchPopularRepos from './api';
 
 const routes = [
     {
         path: '/',
         exact: true,
-        component: Home
+        component: Main
     },
     {
-        path: '/popular/:id',
+        path: '/message',
         exact: true,
-        component: Grid,
-        fetchInitialData: (path = '') => fetchPopularRepos(path.split('/').pop())
-    }
+        component: Message
+    },
+    // {
+    //     path: '/popular/:id',
+    //     exact: true,
+    //     component: Grid,
+    //     fetchInitialData: (path = '') => fetchPopularRepos(path.split('/').pop())
+    // }
 ];
 
 export default routes;

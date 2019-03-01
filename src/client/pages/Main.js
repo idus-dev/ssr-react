@@ -1,13 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import Counter from '../components/Counter';
 
-const Home = () =>
+const Main = () =>
     <div>
         <Helmet>
-            <title>My App | Home</title>
+            <title>My App | Main</title>
             <meta name="description" content="Helmet application" />
         </Helmet>
-        Select a language
+
+        <Counter />
     </div>;
 
-export default Home;
+export default Main;
