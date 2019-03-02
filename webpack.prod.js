@@ -72,8 +72,7 @@ const client = {
             ]
         }),
         new OfflinePlugin({
-            responseStrategy: 'network-first',
-            appShell: '/app-shell.html',
+            appShell: '/app-shell.html'
         })
     ]
 };
