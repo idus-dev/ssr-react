@@ -11,7 +11,7 @@ class Message extends Component {
     render() {
         return (
             <div>
-                aa
+                fetching notification...
             </div>
         );
     }

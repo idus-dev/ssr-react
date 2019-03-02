@@ -57,7 +57,8 @@ const client = {
             ]
         }),
         new OfflinePlugin({
-            appShell: '/app-shell.html'
+            responseStrategy: 'network-first',
+            appShell: '/app-shell.html',
         })
     ]
 };

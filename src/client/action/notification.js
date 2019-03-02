@@ -7,7 +7,13 @@ export const notify = data => ({
 });
 
 export const fetchNotification = () => dispatch => {
-    api.message().then((res) => {
-        dispatch(notify(res));
-    });
+    api.notification()
+        .then(res => {
+            dispatch(notify(res));
+        })
+        .catch(err => {
+            if (!err.status) {
+                dispatch(notify({ message: 'OFFLINE: Please check your internet connections' }));
+            }
+        });
 };
