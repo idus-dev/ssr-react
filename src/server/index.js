@@ -1,12 +1,12 @@
 import { matchPath } from 'react-router-dom';
-import cors from 'cors';
 import express from 'express';
 
 import renderer from './middleware/renderer';
 import storeHandler from './middleware/storeHandler';
+import errorHandler from './middleware/errorHandler';
 import routes from '../client/routes';
 
-import routerNotification from './routes/notification';
+import routerNotification from './api/notification';
 
 const STATIC = process.env.NODE_ENV === 'production'
     ? 'dist'
@@ -40,7 +40,6 @@ if (process.env.NODE_ENV === 'development') {
     app.use(require('webpack-hot-middleware')(compiler));
 }
 
-app.use(cors());
 app.use(express.static(STATIC));
 
 // internal api endpoints
@@ -57,6 +56,9 @@ app.get('*', (req, res, next) => {
         .then(data => renderer(store, data)(req, res))
         .catch(next);
 });
+
+// handle server error
+app.use(errorHandler);
 
 /* eslint-disable no-console */
 app.listen(PORT, () => console.log(`listening on ${PORT} NODE_ENV="${process.env.NODE_ENV}"`));

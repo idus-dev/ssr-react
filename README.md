@@ -2,17 +2,28 @@
 
 ## TODOS
 
-- [x] webpack: dev server & hot reload
+### Common
+
+- [ ] webpack: dev server & hot reload (broken)
 - [x] webpack: production & development configs
+- [ ] testing jest & enzyme
+- [x] add polyfills & support IE9
+- [x] docker container
+
+### Clientside
+
+- [x] react-helmet
+- [ ] react-loadable
 - [x] react-router
 - [x] redux (thunk, devtool)
 - [x] styled-components (no css)
-- [ ] react-loadable
-- [x] react-helmet
-- [x] pwa - manifest.json & serviceworker.js
-- [x] docker container
-- [x] add polyfills & support IE9
-- [ ] testing jest & enzyme
+- [x] pwa - manifest.json & serviceworker.js & offline support
+
+### Serverside
+
+- [x] Serverside renderer
+- [ ] Error handler
+- [ ] logs
 
 ## Docker (production)
 
