@@ -22,8 +22,9 @@
 ### Serverside
 
 - [x] Serverside renderer
-- [ ] Error handler
-- [ ] logs
+- [x] Error handler
+- [x] logs
+- [ ] PM2 (process manager)
 
 ## Docker (production)
 
