@@ -2,8 +2,7 @@ import express from 'express';
 
 import renderer from './middleware/renderer';
 import storeHandler from './middleware/storeHandler';
-import errorHandler from './middleware/errorHandler';
-
+import errorHandler, { logger } from './middleware/errorHandler';
 import routerNotification from './api/notification';
 
 const STATIC = process.env.NODE_ENV === 'production'
@@ -13,6 +12,10 @@ const STATIC = process.env.NODE_ENV === 'production'
 const PORT = process.env.NODE_ENV === 'production'
     ? 8080
     : 3000;
+
+// should process.exit(1) & restart process
+process.on('uncaughtException', (ex) => logger.error(ex.message, ex));
+process.on('unhandledRejection', (ex) => logger.error(ex.message, ex));
 
 const app = express();
 
@@ -41,6 +44,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.static(STATIC));
 
 // internal api endpoints
+app.use(express.json());
 app.use('/api/notification', routerNotification);
 
 // renderer

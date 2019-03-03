@@ -21,7 +21,7 @@ export default (store) => (req, res, next) => {
     const html = renderToString(
         sheet.collectStyles(
             <Provider store={store}>
-                <StaticRouter location={req.url}><App /></StaticRouter>
+                <StaticRouter location={req.url} context={{}}><App /></StaticRouter>
             </Provider>
         )
     );
