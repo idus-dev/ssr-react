@@ -1,10 +1,8 @@
-import { matchPath } from 'react-router-dom';
 import express from 'express';
 
 import renderer from './middleware/renderer';
 import storeHandler from './middleware/storeHandler';
 import errorHandler from './middleware/errorHandler';
-import routes from '../client/routes';
 
 import routerNotification from './api/notification';
 
@@ -45,17 +43,9 @@ app.use(express.static(STATIC));
 // internal api endpoints
 app.use('/api/notification', routerNotification);
 
-app.get('*', (req, res, next) => {
-    const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};
-    const store = storeHandler(req);
-    const fetchInitial = activeRoute.fetchInitialData
-        ? activeRoute.fetchInitialData(req.path)
-        : Promise.resolve();
-
-    fetchInitial
-        .then(data => renderer(store, data)(req, res))
-        .catch(next);
-});
+// renderer
+app.get('*', (req, res, next) =>
+    renderer(storeHandler(req))(req, res, next));
 
 // handle server error
 app.use(errorHandler);

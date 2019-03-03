@@ -48,10 +48,5 @@ hydrate(
 
 if (process.env.NODE_ENV === 'development') {
     require('webpack-hot-middleware/client');
-    if (module.hot) {
-        module.hot.accept();
-        // module.hot.accept('./reducers', () => {
-        //     store.replaceReducer(require('./reducers').default);
-        // });
-    }
+    if (module.hot) module.hot.accept();
 }
