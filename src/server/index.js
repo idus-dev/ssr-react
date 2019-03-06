@@ -1,8 +1,10 @@
 import express from 'express';
 
+import { logger, accessLogger } from './middleware/logger';
 import renderer from './middleware/renderer';
 import storeHandler from './middleware/storeHandler';
-import errorHandler, { logger } from './middleware/errorHandler';
+import errorHandler from './middleware/errorHandler';
+
 import routerNotification from './api/notification';
 
 const STATIC = process.env.NODE_ENV === 'production'
@@ -41,6 +43,10 @@ if (process.env.NODE_ENV === 'development') {
     app.use(require('webpack-hot-middleware')(compiler));
 }
 
+// accessLogger
+app.use(accessLogger);
+
+// STATIC files
 app.use(express.static(STATIC));
 
 // internal api endpoints
