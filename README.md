@@ -24,6 +24,8 @@
 - [x] Serverside renderer
 - [x] Error handler
 - [x] logs
+  - [x] error logs - `error.log`
+  - [x] access logs - `combined.log`
 - [ ] PM2 (process manager)
 
 ## Docker (production)
