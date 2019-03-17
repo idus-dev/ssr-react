@@ -18,6 +18,8 @@ import thunk from 'redux-thunk';
 import App from './App';
 import rootReducer from './reducers/rootReducer';
 
+import './favicon.ico';
+
 OfflinePluginRuntime.install();
 
 // Grab the state from a global variable injected into the server-generated HTML

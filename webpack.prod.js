@@ -33,7 +33,7 @@ const client = {
                 }
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|ico|svg|jpg|gif)$/,
                 use: 'file-loader?name=./assets/images/[name].[ext]'
             }
         ]
@@ -42,8 +42,9 @@ const client = {
         new BundleAnalyzerPlugin({ analyzerMode: 'none' }),
         new webpack.DefinePlugin({ __isBrowser__: 'true' }),
         new HtmlWebpackPlugin({
-            template: 'src/app-shell.html',
+            template: 'src/client/app-shell.html',
             filename: 'app-shell.html',
+            favicon: 'src/client/favicon.ico',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true,
@@ -64,7 +65,7 @@ const client = {
             display: 'standalone',
             icons: [
                 {
-                    src: path.resolve('src/assets/icon.png'),
+                    src: path.resolve('src/client/app-icon.png'),
                     sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
                     destination: path.join('icons', 'ios'),
                     ios: true
@@ -72,7 +73,8 @@ const client = {
             ]
         }),
         new OfflinePlugin({
-            appShell: '/app-shell.html'
+            appShell: '/app-shell.html',
+            responseStrategy: 'cache-first',
         })
     ]
 };

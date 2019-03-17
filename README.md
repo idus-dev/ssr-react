@@ -39,3 +39,7 @@ run image
 ``` shell
 docker run -p ${PORT}:8080 --name ssr-react -d 7ylee/ssr-react
 ```
+
+### favicons
+
+generate from [here](https://favicon.io/emoji-favicons/package/)
