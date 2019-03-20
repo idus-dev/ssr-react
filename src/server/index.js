@@ -43,9 +43,6 @@ if (process.env.NODE_ENV === 'development') {
     app.use(require('webpack-hot-middleware')(compiler));
 }
 
-// accessLogger
-app.use(accessLogger);
-
 // STATIC files
 app.use(express.static(STATIC));
 
@@ -57,8 +54,12 @@ app.use('/api/notification', routerNotification);
 app.get('*', (req, res, next) =>
     renderer(storeHandler(req))(req, res, next));
 
-// handle server error
-app.use(errorHandler);
+if (process.env.NODE_ENV === 'production') {
+    // handle server error
+    app.use(errorHandler);
+    // accessLogger
+    app.use(accessLogger);
+}
 
 /* eslint-disable no-console */
 app.listen(PORT, () => console.log(`listening on ${PORT} NODE_ENV="${process.env.NODE_ENV}"`));
