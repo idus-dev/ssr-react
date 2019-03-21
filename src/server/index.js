@@ -1,9 +1,11 @@
 import express from 'express';
+import { matchPath } from 'react-router-dom';
 
 import { logger, accessLogger } from './middleware/logger';
 import renderer from './middleware/renderer';
 import storeHandler from './middleware/storeHandler';
 import errorHandler from './middleware/errorHandler';
+import routes from '../client/routes';
 
 import routerNotification from './api/notification';
 
@@ -51,8 +53,16 @@ app.use(express.json());
 app.use('/api/notification', routerNotification);
 
 // renderer
-app.get('*', (req, res, next) =>
-    renderer(storeHandler(req))(req, res, next));
+app.get('*', (req, res, next) => {
+    const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};
+    const fetchInitial = activeRoute.preFetch
+        ? activeRoute.preFetch()
+        : Promise.resolve();
+
+    fetchInitial
+        .then(data => renderer(storeHandler(req), data)(req, res, next))
+        .catch(next);
+});
 
 if (process.env.NODE_ENV === 'production') {
     // handle server error

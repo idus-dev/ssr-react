@@ -14,7 +14,8 @@ const App = () => (
         <Navigation />
         <Switch>
             {routes.map(({ path, exact, component: C, ...rest }) => (
-                <Route key={path}
+                <Route
+                    key={path}
                     path={path}
                     exact={exact}
                     render={props => <C {...props} {...rest} />}

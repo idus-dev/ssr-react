@@ -5,6 +5,7 @@ import { ServerStyleSheet } from 'styled-components';
 import { StaticRouter } from 'react-router-dom';
 import fs from 'fs';
 import React from 'react';
+import serialize from 'serialize-javascript';
 
 import App from '../../client/App';
 
@@ -14,14 +15,15 @@ const templatePath = process.env.NODE_ENV === 'production'
 
 const filePath = `./${templatePath}/app-shell.html`;
 
-export default (store) => (req, res, next) => {
+export default (store, data) => (req, res, next) => {
     const preloadedState = store.getState();
+    const context = { data };
     const sheet = new ServerStyleSheet();
     const helmet = Helmet.renderStatic();
     const html = renderToString(
         sheet.collectStyles(
             <Provider store={store}>
-                <StaticRouter location={req.url} context={{}}><App /></StaticRouter>
+                <StaticRouter location={req.url} context={context}><App /></StaticRouter>
             </Provider>
         )
     );
@@ -33,6 +35,7 @@ export default (store) => (req, res, next) => {
             htmlData
                 .replace('<title></title>', helmet.title.toString())
                 .replace('<style></style>', sheet.getStyleTags())
+                .replace('__INITIAL_DATA__={}', `__INITIAL_DATA__=${serialize(data)}`)
                 .replace('__PRELOADED_STATE__={}', `__PRELOADED_STATE__=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}`)
                 .replace('<div id="app"></div>', `<div id="app">${html}</div>`)
         );

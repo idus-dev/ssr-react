@@ -27,6 +27,9 @@ const Navigation = () => {
     }, {
         name: 'Message',
         param: 'message'
+    }, {
+        name: 'Prefetch',
+        param: 'preFetch'
     }];
 
     return (
