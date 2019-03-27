@@ -5,7 +5,6 @@ import { ServerStyleSheet } from 'styled-components';
 import { StaticRouter } from 'react-router-dom';
 import fs from 'fs';
 import React from 'react';
-import serialize from 'serialize-javascript';
 
 import App from '../../client/App';
 
@@ -35,7 +34,6 @@ export default (store, data) => (req, res, next) => {
             htmlData
                 .replace('<title></title>', helmet.title.toString())
                 .replace('<style></style>', sheet.getStyleTags())
-                .replace('__INITIAL_DATA__={}', `__INITIAL_DATA__=${serialize(data)}`)
                 .replace('__PRELOADED_STATE__={}', `__PRELOADED_STATE__=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}`)
                 .replace('<div id="app"></div>', `<div id="app">${html}</div>`)
         );

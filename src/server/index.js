@@ -55,12 +55,12 @@ app.use('/api/notification', routerNotification);
 // renderer
 app.get('*', (req, res, next) => {
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};
-    const fetchInitial = activeRoute.preFetch
+    const beforeRender = activeRoute.preFetch
         ? activeRoute.preFetch()
         : Promise.resolve();
 
-    fetchInitial
-        .then(data => renderer(storeHandler(req), data)(req, res, next))
+    beforeRender
+        .then(data => renderer(storeHandler(data, req))(req, res, next))
         .catch(next);
 });
 

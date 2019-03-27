@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as action from '../action/notification';
 
 class Message extends Component {
@@ -22,5 +23,9 @@ function mapStateToProps(state) {
         message: state.message,
     };
 }
+
+Message.propTypes = {
+    fetchNotification: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, { fetchNotification: action.fetchNotification })(Message);

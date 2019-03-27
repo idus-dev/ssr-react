@@ -25,12 +25,12 @@ const Navigation = () => {
         name: 'Main',
         param: ''
     }, {
+        name: 'Prefetch',
+        param: 'prefetch'
+    }, {
         name: 'Message',
         param: 'message'
-    }, {
-        name: 'Prefetch',
-        param: 'preFetch'
-    }];
+    },];
 
     return (
         <NavStyle>
