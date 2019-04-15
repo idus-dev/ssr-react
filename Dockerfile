@@ -4,9 +4,7 @@ FROM node:8.14.0-alpine
 WORKDIR /usr/src/app
 
 # ENV
-ENV abc=hello
-ENV abc=bye def=$abc
-ENV ghi=$abc
+ENV SECRET=production_secret
 
 # Install app dependencies
 COPY package*.json ./

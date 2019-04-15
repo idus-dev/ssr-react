@@ -4,6 +4,7 @@ const path = require('path');
 const OfflinePlugin = require('offline-plugin');
 const webpack = require('webpack');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const Dotenv = require('dotenv-webpack');
 
 const client = {
     mode: 'development',
@@ -33,6 +34,9 @@ const client = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             __isBrowser__: 'true'
+        }),
+        new Dotenv({
+            path: path.resolve(process.cwd(), '.env')
         }),
         new HtmlWebpackPlugin({
             template: 'src/client/app-shell.html',
