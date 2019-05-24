@@ -2,9 +2,9 @@
 /* eslint-disable global-require */
 
 // polyfills
-import 'core-js/fn/set';
-import 'core-js/fn/promise';
-import 'core-js/es6/map';
+import 'core-js/features/set';
+import 'core-js/features/promise';
+import 'core-js/es/map';
 
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import { BrowserRouter } from 'react-router-dom';
