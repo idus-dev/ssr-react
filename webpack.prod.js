@@ -76,7 +76,7 @@ const client = {
             icons: [
                 {
                     src: path.resolve('src/client/app-icon.png'),
-                    sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+                    sizes: [96, 128, 192, 256, 384, 512],
                     destination: path.join('icons', 'ios'),
                     ios: true
                 }
@@ -85,6 +85,7 @@ const client = {
         new OfflinePlugin({
             appShell: '/app-shell.html',
             responseStrategy: 'cache-first',
+            excludes: ['**/.*', '**/*.map'], // by default '**/*.gz' is excluded
         }),
         new BundleAnalyzerPlugin({ analyzerMode: 'none' }),
     ]
