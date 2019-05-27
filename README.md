@@ -18,6 +18,7 @@
 - [x] redux (thunk, devtool)
 - [x] styled-components (no css)
 - [x] pwa - manifest.json & serviceworker.js & offline support
+- [x] bundle js in *.js.gz format
 
 ### Serverside
 

@@ -1,8 +1,9 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
-const path = require('path');
 const OfflinePlugin = require('offline-plugin');
+const path = require('path');
 const webpack = require('webpack');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
@@ -39,7 +40,6 @@ const client = {
         ]
     },
     plugins: [
-        new BundleAnalyzerPlugin({ analyzerMode: 'none' }),
         new webpack.DefinePlugin({ __isBrowser__: 'true' }),
         new HtmlWebpackPlugin({
             template: 'src/client/app-shell.html',
@@ -52,7 +52,15 @@ const client = {
                 removeScriptTypeAttributes: true,
                 removeStyleLinkTypeAttributes: true,
                 useShortDoctype: true
-            }
+            },
+            jsExtension: '.gz'
+        }),
+        new CompressionPlugin({
+            deleteOriginalAssets: true,
+            filename: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.js$/,
+            minRatio: 0.8,
         }),
         new WebpackPwaManifest({
             inject: true,
@@ -75,7 +83,8 @@ const client = {
         new OfflinePlugin({
             appShell: '/app-shell.html',
             responseStrategy: 'cache-first',
-        })
+        }),
+        new BundleAnalyzerPlugin({ analyzerMode: 'none' }),
     ]
 };
 

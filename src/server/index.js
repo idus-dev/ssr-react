@@ -45,6 +45,14 @@ if (process.env.NODE_ENV === 'development') {
     app.use(require('webpack-hot-middleware')(compiler));
 }
 
+// gzip middleware
+app.get('*.bundle.js', (req, res, next) => {
+    req.url += '.gz';
+    res.set('Content-Encoding', 'gzip');
+    res.set('Content-Type', 'text/javascript');
+    next();
+});
+
 // STATIC files
 app.use(express.static(STATIC));
 
