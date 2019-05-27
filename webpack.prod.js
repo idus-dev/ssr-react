@@ -1,5 +1,6 @@
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
+const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const OfflinePlugin = require('offline-plugin');
@@ -62,6 +63,7 @@ const client = {
             test: /\.js$/,
             minRatio: 0.8,
         }),
+        new HtmlWebpackChangeAssetsExtensionPlugin(),
         new WebpackPwaManifest({
             inject: true,
             ios: true,

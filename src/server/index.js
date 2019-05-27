@@ -46,8 +46,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // gzip middleware
-app.get('*.bundle.js', (req, res, next) => {
-    req.url += '.gz';
+app.get('*.js.gz', (req, res, next) => {
     res.set('Content-Encoding', 'gzip');
     res.set('Content-Type', 'text/javascript');
     next();
