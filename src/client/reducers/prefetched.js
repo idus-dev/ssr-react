@@ -5,6 +5,7 @@ export default function prefetched(state = [], action = {}) {
         case FETCH_DATA:
             return action.data;
 
-        default: return state;
+        default:
+            return state;
     }
 }

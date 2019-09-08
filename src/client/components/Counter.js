@@ -4,17 +4,22 @@ import React from 'react';
 
 import * as action from '../action/counter';
 
-const Counter = ({ counter, increment, decrement }) =>
+const Counter = ({ counter, increment, decrement }) => (
     <div>
-        <button type="button" onClick={decrement}>-</button>
-        <button type="button" onClick={increment}>+</button>
+        <button type="button" onClick={decrement}>
+            -
+        </button>
+        <button type="button" onClick={increment}>
+            +
+        </button>
         <span>{counter}</span>
-    </div>;
+    </div>
+);
 
 Counter.propTypes = {
     counter: PropTypes.number.isRequired,
     increment: PropTypes.func.isRequired,
-    decrement: PropTypes.func.isRequired,
+    decrement: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -23,7 +28,10 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, {
-    increment: action.increment,
-    decrement: action.decrement
-})(Counter);
+export default connect(
+    mapStateToProps,
+    {
+        increment: action.increment,
+        decrement: action.decrement
+    }
+)(Counter);

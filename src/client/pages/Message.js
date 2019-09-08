@@ -10,22 +10,21 @@ class Message extends Component {
     }
 
     render() {
-        return (
-            <div>
-                fetching notification...
-            </div>
-        );
+        return <div>fetching notification...</div>;
     }
 }
 
 function mapStateToProps(state) {
     return {
-        message: state.message,
+        message: state.message
     };
 }
 
 Message.propTypes = {
-    fetchNotification: PropTypes.func.isRequired,
+    fetchNotification: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps, { fetchNotification: action.fetchNotification })(Message);
+export default connect(
+    mapStateToProps,
+    { fetchNotification: action.fetchNotification }
+)(Message);

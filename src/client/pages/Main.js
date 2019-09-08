@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Counter from '../components/Counter';
 
-const Main = () =>
+const Main = () => (
     <div>
         <Helmet>
             <title>My App | Main</title>
@@ -10,6 +10,7 @@ const Main = () =>
         </Helmet>
 
         <Counter />
-    </div>;
+    </div>
+);
 
 export default Main;

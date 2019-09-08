@@ -12,7 +12,9 @@ class Prefetched extends Component {
 
     render() {
         const { prefetched } = this.props;
-        const template = prefetched.map(item => <div key={item.name}>{item.name}</div>);
+        const template = prefetched.map(item => (
+            <div key={item.name}>{item.name}</div>
+        ));
 
         return <div>{template}</div>;
     }
@@ -22,17 +24,19 @@ Prefetched.propTypes = {
     prefetchUrl: PropTypes.func.isRequired,
     history: PropTypes.shape({
         location: PropTypes.shape({
-            pathname: PropTypes.string.isRequired,
-        }).isRequired,
+            pathname: PropTypes.string.isRequired
+        }).isRequired
     }).isRequired,
-    prefetched: PropTypes.arrayOf(PropTypes.shape({
-    })).isRequired,
+    prefetched: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        prefetched: state.prefetched,
+        prefetched: state.prefetched
     };
 }
 
-export default connect(mapStateToProps, { prefetchUrl: actions.prefetchUrl })(Prefetched);
+export default connect(
+    mapStateToProps,
+    { prefetchUrl: actions.prefetchUrl }
+)(Prefetched);

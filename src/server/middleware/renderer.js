@@ -8,9 +8,7 @@ import React from 'react';
 
 import App from '../../client/App';
 
-const templatePath = process.env.NODE_ENV === 'production'
-    ? 'dist'
-    : 'dev';
+const templatePath = process.env.NODE_ENV === 'production' ? 'dist' : 'dev';
 
 const filePath = `./${templatePath}/app-shell.html`;
 
@@ -22,7 +20,9 @@ export default (store, data) => (req, res, next) => {
     const html = renderToString(
         sheet.collectStyles(
             <Provider store={store}>
-                <StaticRouter location={req.url} context={context}><App /></StaticRouter>
+                <StaticRouter location={req.url} context={context}>
+                    <App />
+                </StaticRouter>
             </Provider>
         )
     );
@@ -34,7 +34,12 @@ export default (store, data) => (req, res, next) => {
             htmlData
                 .replace('<title></title>', helmet.title.toString())
                 .replace('<style></style>', sheet.getStyleTags())
-                .replace('__PRELOADED_STATE__={}', `__PRELOADED_STATE__=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}`)
+                .replace(
+                    '__PRELOADED_STATE__={}',
+                    `__PRELOADED_STATE__=${JSON.stringify(
+                        preloadedState
+                    ).replace(/</g, '\\u003c')}`
+                )
                 .replace('<div id="app"></div>', `<div id="app">${html}</div>`)
         );
     });

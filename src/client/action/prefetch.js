@@ -8,13 +8,19 @@ export const prefetch = data => ({
 });
 
 export const prefetchUrl = pathname => dispatch => {
-    const activeRoute = routes.find((route) => matchPath(pathname, route)) || {};
+    const activeRoute = routes.find(route => matchPath(pathname, route)) || {};
 
-    activeRoute.preFetch()
+    activeRoute
+        .preFetch()
         .then(res => dispatch(prefetch(res)))
         .catch(err => {
             if (!err.status) {
-                dispatch(prefetch({ message: 'OFFLINE: Please check your internet connections' }));
+                dispatch(
+                    prefetch({
+                        message:
+                            'OFFLINE: Please check your internet connections'
+                    })
+                );
             }
         });
 };

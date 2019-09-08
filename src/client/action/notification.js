@@ -13,7 +13,12 @@ export const fetchNotification = () => dispatch => {
         })
         .catch(err => {
             if (!err.status) {
-                dispatch(notify({ message: 'OFFLINE: Please check your internet connections' }));
+                dispatch(
+                    notify({
+                        message:
+                            'OFFLINE: Please check your internet connections'
+                    })
+                );
             }
         });
 };

@@ -5,6 +5,7 @@ export default function notification(state = {}, action = {}) {
         case FETCH_NOTIFICATION:
             return action.data;
 
-        default: return state;
+        default:
+            return state;
     }
 }

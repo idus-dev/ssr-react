@@ -9,17 +9,13 @@ import routes from '../client/routes';
 
 import routerNotification from './api/notification';
 
-const STATIC = process.env.NODE_ENV === 'production'
-    ? 'dist'
-    : 'dev';
+const STATIC = process.env.NODE_ENV === 'production' ? 'dist' : 'dev';
 
-const PORT = process.env.NODE_ENV === 'production'
-    ? 8080
-    : 3000;
+const PORT = process.env.NODE_ENV === 'production' ? 8080 : 3000;
 
 // should process.exit(1) & restart process
-process.on('uncaughtException', (ex) => logger.error(ex.message, ex));
-process.on('unhandledRejection', (ex) => logger.error(ex.message, ex));
+process.on('uncaughtException', ex => logger.error(ex.message, ex));
+process.on('unhandledRejection', ex => logger.error(ex.message, ex));
 
 const app = express();
 
@@ -29,19 +25,21 @@ if (process.env.NODE_ENV === 'development') {
     const config = require('../../webpack.config');
     const compiler = webpack(config[0]);
 
-    app.use(require('webpack-dev-middleware')(compiler, {
-        noInfo: true,
-        publicPath: config[0].output.publicPath,
-        stats: {
-            assets: false,
-            colors: true,
-            version: false,
-            hash: false,
-            timings: false,
-            chunks: false,
-            chunkModules: false
-        }
-    }));
+    app.use(
+        require('webpack-dev-middleware')(compiler, {
+            noInfo: true,
+            publicPath: config[0].output.publicPath,
+            stats: {
+                assets: false,
+                colors: true,
+                version: false,
+                hash: false,
+                timings: false,
+                chunks: false,
+                chunkModules: false
+            }
+        })
+    );
     app.use(require('webpack-hot-middleware')(compiler));
 }
 
@@ -61,7 +59,7 @@ app.use('/api/notification', routerNotification);
 
 // renderer
 app.get('*', (req, res, next) => {
-    const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};
+    const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
     const beforeRender = activeRoute.preFetch
         ? activeRoute.preFetch()
         : Promise.resolve();
@@ -79,4 +77,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 /* eslint-disable no-console */
-app.listen(PORT, () => console.log(`listening on ${PORT} NODE_ENV="${process.env.NODE_ENV}"`));
+app.listen(PORT, () =>
+    console.log(`listening on ${PORT} NODE_ENV="${process.env.NODE_ENV}"`)
+);

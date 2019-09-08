@@ -16,26 +16,32 @@ const NavStyle = styled.nav`
     }
 
     .active {
-        color: red
+        color: red;
     }
 `;
 
 const Navigation = () => {
-    const languages = [{
-        name: 'Main',
-        param: ''
-    }, {
-        name: 'Prefetch',
-        param: 'prefetch'
-    }, {
-        name: 'Message',
-        param: 'message'
-    },];
+    const languages = [
+        {
+            name: 'Main',
+            param: ''
+        },
+        {
+            name: 'Prefetch',
+            param: 'prefetch'
+        },
+        {
+            name: 'Message',
+            param: 'message'
+        }
+    ];
 
     return (
         <NavStyle>
             {languages.map(({ name, param }) => (
-                <LinkStyle key={param} to={`/${param}`}>{name}</LinkStyle>
+                <LinkStyle key={param} to={`/${param}`}>
+                    {name}
+                </LinkStyle>
             ))}
         </NavStyle>
     );

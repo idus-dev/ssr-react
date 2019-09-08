@@ -33,8 +33,10 @@ let middleware;
 if (process.env.NODE_ENV === 'production') {
     middleware = applyMiddleware(thunk);
 } else {
-    middleware = require('redux-devtools-extension').composeWithDevTools(applyMiddleware(thunk));
-};
+    middleware = require('redux-devtools-extension').composeWithDevTools(
+        applyMiddleware(thunk)
+    );
+}
 
 // Create Redux store with initial state
 const store = createStore(rootReducer, preloadedState, middleware);
