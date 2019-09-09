@@ -62,10 +62,10 @@ const client = {
             ]
         }),
         new OfflinePlugin({
-            appShell: 'network-first',
-            responseStrategy: 'cache-first',
-            excludes: ['**/.*', '**/*.map'], // by default '**/*.gz' is excluded
-        }),
+            appShell: '/app-shell.html',
+            responseStrategy: 'network-first',
+            excludes: ['**/.*', '**/*.map'] // by default '**/*.gz' is excluded
+        })
     ]
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
@@ -61,7 +62,7 @@ const client = {
             filename: '[path].gz[query]',
             algorithm: 'gzip',
             test: /\.js$/,
-            minRatio: 0.8,
+            minRatio: 0.8
         }),
         new HtmlWebpackChangeAssetsExtensionPlugin(),
         new WebpackPwaManifest({
@@ -84,10 +85,11 @@ const client = {
         }),
         new OfflinePlugin({
             appShell: '/app-shell.html',
-            responseStrategy: 'cache-first',
+            responseStrategy: 'network-first',
             excludes: ['**/.*', '**/*.map'], // by default '**/*.gz' is excluded
+            externals: ['/']
         }),
-        new BundleAnalyzerPlugin({ analyzerMode: 'none' }),
+        new BundleAnalyzerPlugin({ analyzerMode: 'none' })
     ]
 };
 
@@ -116,9 +118,7 @@ const server = {
             }
         ]
     },
-    plugins: [
-        new webpack.DefinePlugin({ __isBrowser__: 'false' })
-    ]
+    plugins: [new webpack.DefinePlugin({ __isBrowser__: 'false' })]
 };
 
 module.exports = [client, server];
