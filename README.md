@@ -4,7 +4,7 @@
 
 ### Common
 
-- [ ] webpack: dev server & hot reload (broken)
+- [x] webpack: dev server & hot reload
 - [x] webpack: production & development configs
 - [ ] testing jest & enzyme
 - [x] add polyfills & support IE9

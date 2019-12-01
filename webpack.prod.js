@@ -4,16 +4,17 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackChangeAssetsExtensionPlugin = require('html-webpack-change-assets-extension-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
-const OfflinePlugin = require('offline-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const Dotenv = require('dotenv-webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const client = {
     mode: 'production',
     entry: './src/client/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].[hash].bundle.js',
         chunkFilename: '[name].[hash].bundle.js',
         publicPath: '/'
@@ -24,7 +25,25 @@ const client = {
         },
         runtimeChunk: {
             name: entrypoint => `runtime~${entrypoint.name}`
-        }
+        },
+        minimize: true,
+        minimizer: [
+            new TerserPlugin({
+                chunkFilter: chunk => {
+                    // Exclude uglification for the `vendor` chunk
+                    if (chunk.name === 'vendor') {
+                        return false;
+                    }
+
+                    return true;
+                },
+                terserOptions: {
+                    compress: {
+                        drop_console: true
+                    }
+                }
+            })
+        ]
     },
     module: {
         rules: [
@@ -42,11 +61,14 @@ const client = {
         ]
     },
     plugins: [
+        new Dotenv({
+            path: path.resolve(process.cwd(), '.env.production')
+        }),
         new webpack.DefinePlugin({ __isBrowser__: 'true' }),
         new HtmlWebpackPlugin({
             template: 'src/client/app-shell.html',
             filename: 'app-shell.html',
-            favicon: 'src/client/favicon.ico',
+            favicon: 'public/favicon.ico',
             minify: {
                 collapseWhitespace: true,
                 removeComments: true,
@@ -76,18 +98,12 @@ const client = {
             display: 'standalone',
             icons: [
                 {
-                    src: path.resolve('src/client/app-icon.png'),
+                    src: path.resolve('public/app-icon.png'),
                     sizes: [96, 128, 192, 256, 384, 512],
                     destination: path.join('icons', 'ios'),
                     ios: true
                 }
             ]
-        }),
-        new OfflinePlugin({
-            appShell: '/app-shell.html',
-            responseStrategy: 'network-first',
-            excludes: ['**/.*', '**/*.map'], // by default '**/*.gz' is excluded
-            externals: ['/']
         }),
         new BundleAnalyzerPlugin({ analyzerMode: 'none' })
     ]
@@ -99,9 +115,10 @@ const server = {
     target: 'node',
     externals: [nodeExternals()],
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: 'server.js',
-        publicPath: '/'
+        publicPath: '/',
+        libraryTarget: 'commonjs2'
     },
     module: {
         rules: [

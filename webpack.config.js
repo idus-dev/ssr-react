@@ -1,18 +1,21 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const nodeExternals = require('webpack-node-externals');
-const path = require('path');
-const OfflinePlugin = require('offline-plugin');
-const webpack = require('webpack');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
 const Dotenv = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
-const client = {
+module.exports = {
     mode: 'development',
-    entry: './src/client/index.js',
-    devtool: 'eval',
+    devServer: {
+        contentBase: path.join(__dirname, 'dev'),
+        port: 3000,
+        host: `localhost`
+    },
+    entry: {
+        app: ['./src/client/index.js']
+    },
     output: {
-        path: path.resolve(__dirname, 'dev'),
-        filename: 'bundle.js',
+        path: path.join(__dirname, 'dev'),
+        filename: 'client.js',
         publicPath: '/'
     },
     module: {
@@ -26,79 +29,31 @@ const client = {
             },
             {
                 test: /\.(png|ico|svg|jpg|gif)$/,
-                use: 'file-loader?name=./assets/images/[name].[ext]'
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: './assets/images/[name].[ext]'
+                        }
+                    }
+                ]
             }
         ]
     },
+    resolve: {
+        alias: {}
+    },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             __isBrowser__: 'true'
         }),
         new Dotenv({
-            path: path.resolve(process.cwd(), '.env')
+            path: path.resolve(process.cwd(), '.env.local')
         }),
         new HtmlWebpackPlugin({
             template: 'src/client/app-shell.html',
             filename: 'app-shell.html',
-            favicon: 'src/client/favicon.ico'
-        }),
-        new WebpackPwaManifest({
-            inject: true,
-            ios: true,
-            name: 'SSR-React',
-            short_name: 'SSR',
-            description: 'My awesome Progressive Web App!',
-            background_color: '#dd5850',
-            theme_color: '#dd5850',
-            display: 'standalone',
-            icons: [
-                {
-                    src: path.resolve('src/client/app-icon.png'),
-                    sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-                    destination: path.join('icons', 'ios'),
-                    ios: true
-                }
-            ]
-        }),
-        new OfflinePlugin({
-            appShell: '/app-shell.html',
-            responseStrategy: 'network-first',
-            excludes: ['**/.*', '**/*.map'] // by default '**/*.gz' is excluded
+            favicon: './public/favicon.ico'
         })
     ]
 };
-
-const server = {
-    mode: 'development',
-    entry: './src/server/index.js',
-    target: 'node',
-    output: {
-        path: path.resolve(__dirname, 'dev'),
-        filename: 'server.js',
-        publicPath: '/'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.m?js$/,
-                exclude: /(node_modules)/,
-                use: {
-                    loader: 'babel-loader'
-                }
-            },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: 'file-loader?name=./assets/images/[name].[ext]'
-            }
-        ]
-    },
-    externals: [nodeExternals()],
-    plugins: [
-        new webpack.DefinePlugin({
-            __isBrowser__: 'false'
-        })
-    ]
-};
-
-module.exports = [client, server];

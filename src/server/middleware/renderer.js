@@ -8,7 +8,7 @@ import React from 'react';
 
 import App from '../../client/App';
 
-const templatePath = process.env.NODE_ENV === 'production' ? 'dist' : 'dev';
+const templatePath = process.env.NODE_ENV === 'production' ? 'build' : 'dev';
 
 const filePath = `./${templatePath}/app-shell.html`;
 

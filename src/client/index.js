@@ -6,7 +6,7 @@ import 'core-js/features/set';
 import 'core-js/features/promise';
 import 'core-js/es/map';
 
-import * as OfflinePluginRuntime from 'offline-plugin/runtime';
+// import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { hydrate } from 'react-dom';
@@ -18,9 +18,7 @@ import thunk from 'redux-thunk';
 import App from './App';
 import rootReducer from './reducers/rootReducer';
 
-import './favicon.ico';
-
-OfflinePluginRuntime.install();
+// OfflinePluginRuntime.install();
 
 // Grab the state from a global variable injected into the server-generated HTML
 const preloadedState = window.__PRELOADED_STATE__;
