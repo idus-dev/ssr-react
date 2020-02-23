@@ -8,6 +8,7 @@ import renderer from './middleware/renderer';
 import storeHandler from './middleware/storeHandler';
 import errorHandler from './middleware/errorHandler';
 import routes from '../client/routes';
+import todoRoutes from './api/todoRoutes';
 
 // use docker ENV for production
 if (process.env.NODE_ENV !== 'production')
@@ -34,6 +35,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(STATIC));
 app.use(express.static('./public')); // extra assets
+
+// internal api endpoints
+app.use(express.json());
+
+app.use(todoRoutes());
 
 // renderer
 app.get('*', (req, res, next) => {

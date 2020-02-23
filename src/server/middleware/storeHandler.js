@@ -1,14 +1,11 @@
 import { createStore } from 'redux';
 
-import rootReducer from '../../client/reducers/rootReducer';
+import rootReducer from '../../client/store/reducers/rootReducer';
 
 export default data => {
     const preloadedState = {};
 
-    // set initial state from server
-    preloadedState.counter = 5;
-    preloadedState.prefetched = data;
+    console.log(data);
 
-    // handle preloaded state here
     return createStore(rootReducer, preloadedState);
 };

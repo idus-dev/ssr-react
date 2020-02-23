@@ -1,6 +1,7 @@
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import routes from '../routes';
 
 const LinkStyle = styled(NavLink)`
     color: #999;
@@ -20,31 +21,14 @@ const NavStyle = styled.nav`
     }
 `;
 
-const Navigation = () => {
-    const languages = [
-        {
-            name: 'Main',
-            param: ''
-        },
-        {
-            name: 'Prefetch',
-            param: 'prefetch'
-        },
-        {
-            name: 'Message',
-            param: 'message'
-        }
-    ];
-
-    return (
-        <NavStyle>
-            {languages.map(({ name, param }) => (
-                <LinkStyle key={param} to={`/${param}`}>
-                    {name}
-                </LinkStyle>
-            ))}
-        </NavStyle>
-    );
-};
+const Navigation = () => (
+    <NavStyle>
+        {routes.map(({ name, path }) => (
+            <LinkStyle key={name} to={path}>
+                {name}
+            </LinkStyle>
+        ))}
+    </NavStyle>
+);
 
 export default Navigation;

@@ -1,17 +1,16 @@
 import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 
+import ResetCSS from './components/ResetCSS';
 import Navigation from './components/Navigation';
-import Notification from './components/Notification';
 import NoMatch from './pages/NoMatch';
 import routes from './routes';
-import { NormalizeStyle } from './components/GlobalStyles';
 
 const App = () => (
     <main>
-        <NormalizeStyle />
-        <Notification />
+        <ResetCSS />
         <Navigation />
+        {/* eslint-disable react/jsx-props-no-spreading */}
         <Switch>
             {routes.map(({ path, exact, component: C, ...rest }) => (
                 <Route
@@ -23,6 +22,7 @@ const App = () => (
             ))}
             <Route render={props => <NoMatch {...props} />} />
         </Switch>
+        {/* eslint-ensable react/jsx-props-no-spreading */}
     </main>
 );
 

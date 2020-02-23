@@ -1,11 +1,9 @@
 import Main from './pages/Main';
-import Message from './pages/Message';
-// import api from './api';
+import Todos from './pages/Todos';
 
 const routes = [
-    { path: '/', exact: true, component: Main },
-    { path: '/message', exact: true, component: Message }
-    // { path: '/prefetch', exact: true, component: Prefetch, preFetch: api.posts }
+    { path: '/', name: 'main', exact: true, component: Main },
+    { path: '/todos', name: 'todos list', exact: true, component: Todos }
 ];
 
 export default routes;
