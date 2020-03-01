@@ -44,11 +44,11 @@ app.use(todoRoutes());
 // renderer
 app.get('*', (req, res, next) => {
     const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
-    const beforeRender = activeRoute.preFetch
+    const preFetched = activeRoute.preFetch
         ? activeRoute.preFetch()
         : Promise.resolve();
 
-    beforeRender
+    preFetched
         .then(data => renderer(storeHandler(data, req))(req, res, next))
         .catch(next);
 });

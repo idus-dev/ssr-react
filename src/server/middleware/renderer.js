@@ -10,7 +10,6 @@ import branch from 'git-branch';
 import App from '../../client/App';
 
 const templatePath = process.env.NODE_ENV === 'production' ? 'build' : 'dev';
-
 const filePath = `./${templatePath}/app-shell.html`;
 const branchLabel =
     process.env.NODE_ENV === 'development'
@@ -40,8 +39,8 @@ export default (store, data) => (req, res, next) => {
                 .replace('<title></title>', helmet.title.toString())
                 .replace('<style></style>', sheet.getStyleTags())
                 .replace(
-                    '__PRELOADED_STATE__={}',
-                    `__PRELOADED_STATE__=${JSON.stringify(
+                    '__PRELOADED_STATE__ = {};',
+                    `__PRELOADED_STATE__ = ${JSON.stringify(
                         preloadedState
                     ).replace(/</g, '\\u003c')}`
                 )

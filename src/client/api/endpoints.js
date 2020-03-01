@@ -1,3 +1,5 @@
+const host = 'http://localhost:3000';
+
 export default {
-    todos: '/api/todos'
+    todos: `${host}/api/todos`
 };
