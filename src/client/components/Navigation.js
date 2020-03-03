@@ -24,7 +24,7 @@ const NavStyle = styled.nav`
 const Navigation = () => (
     <NavStyle>
         {routes.map(({ name, path }) => (
-            <LinkStyle key={name} to={path}>
+            <LinkStyle exact key={name} to={path}>
                 {name}
             </LinkStyle>
         ))}
