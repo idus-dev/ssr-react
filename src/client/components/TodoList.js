@@ -1,58 +1,37 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import useForm from '../hooks/useForm';
+
 import * as action from '../store/action/todos';
 
-class TodoList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userinput: ''
-        };
-    }
+const TodoList = ({ todos, postTodos, fetchTodos }) => {
+    useEffect(() => fetchTodos(), []);
 
-    componentDidMount() {
-        const { fetchTodos } = this.props;
-        fetchTodos();
-    }
+    const { handleSubmit, handleChange, values, errors } = useForm(() =>
+        postTodos(values.userInput)
+    );
 
-    handleSubmit = event => {
-        const { postTodos } = this.props;
-        const { userinput } = this.state;
-        event.preventDefault();
-        postTodos(userinput);
-
-        this.setState({ userinput: '' });
-    };
-
-    handleInputChange = event =>
-        this.setState({ [event.target.name]: event.target.value });
-
-    render() {
-        const { todos } = this.props;
-        const { userinput } = this.state;
-
-        return (
-            <div>
-                <ul>
-                    {todos.map(({ id, text }) => (
-                        <li key={id}>{text}</li>
-                    ))}
-                </ul>
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        type="text"
-                        name="userinput"
-                        autoComplete="off"
-                        onChange={this.handleInputChange}
-                        value={userinput}
-                    />
-                    <button type="submit">submit</button>
-                </form>
-            </div>
-        );
-    }
-}
+    return (
+        <>
+            <ul>
+                {todos.map(({ id, text }) => (
+                    <li key={id}>{text}</li>
+                ))}
+            </ul>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    name="userInput"
+                    onChange={handleChange}
+                    value={values.userInput}
+                />
+                <button type="submit">Submit</button>
+            </form>
+            {errors.userInput && <mark>{errors.userInput}</mark>}
+        </>
+    );
+};
 
 function mapStateToProps(state) {
     return {
