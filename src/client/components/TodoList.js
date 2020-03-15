@@ -21,6 +21,7 @@ const TodoList = ({ todos, postTodos, fetchTodos }) => {
             </ul>
             <form onSubmit={handleSubmit}>
                 <input
+                    autoComplete="off"
                     type="text"
                     name="userInput"
                     onChange={handleChange}

@@ -8,6 +8,7 @@ import React from 'react';
 import branch from 'git-branch';
 
 import App from '../../client/App';
+import storeHandler from './storeHandler';
 
 const templatePath = process.env.NODE_ENV === 'production' ? 'build' : 'dev';
 const filePath = `./${templatePath}/app-shell.html`;
@@ -16,15 +17,14 @@ const branchLabel =
         ? `<span style="position:fixed; right:0; top:0; color: #fff; background: rgba(0,0,0,0.3); padding: 2px 5px">${branch.sync()}</span>`
         : '';
 
-export default (store, data) => (req, res, next) => {
-    const preloadedState = store.getState();
-    const context = { data };
+export default activeRoute => async (req, res, next) => {
+    const store = await storeHandler(activeRoute);
     const sheet = new ServerStyleSheet();
     const helmet = Helmet.renderStatic();
     const html = renderToString(
         sheet.collectStyles(
             <Provider store={store}>
-                <StaticRouter location={req.url} context={context}>
+                <StaticRouter location={req.url}>
                     <App />
                 </StaticRouter>
             </Provider>
@@ -41,7 +41,7 @@ export default (store, data) => (req, res, next) => {
                 .replace(
                     '__PRELOADED_STATE__ = {};',
                     `__PRELOADED_STATE__ = ${JSON.stringify(
-                        preloadedState
+                        store.getState()
                     ).replace(/</g, '\\u003c')}`
                 )
                 .replace(

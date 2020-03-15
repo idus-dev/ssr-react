@@ -5,7 +5,6 @@ import express from 'express';
 
 import { logger, accessLogger } from './middleware/logger';
 import renderer from './middleware/renderer';
-import storeHandler from './middleware/storeHandler';
 import errorHandler from './middleware/errorHandler';
 import routes from '../client/routes';
 import todoRoutes from './api/todoRoutes';
@@ -44,13 +43,7 @@ app.use(todoRoutes());
 // renderer
 app.get('*', (req, res, next) => {
     const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
-    const preFetched = activeRoute.preFetch
-        ? activeRoute.preFetch()
-        : Promise.resolve();
-
-    preFetched
-        .then(data => renderer(storeHandler(data, req))(req, res, next))
-        .catch(next);
+    renderer(activeRoute)(req, res, next);
 });
 
 if (process.env.NODE_ENV === 'production') {
