@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import useForm from '../hooks/useForm';
-
+import { useSelector, useDispatch } from 'react-redux';
 import * as action from '../store/action/todos';
 
-const TodoList = ({ todos, postTodos, fetchTodos }) => {
-    useEffect(() => fetchTodos(), []);
+import useForm from '../hooks/useForm';
 
+const TodoList = () => {
+    const todos = useSelector(state => state.todos);
+    const dispatch = useDispatch();
     const { handleSubmit, handleChange, values, errors } = useForm(() =>
-        postTodos(values.userInput)
+        dispatch(action.postTodos(values.userInput))
     );
+
+    useEffect(() => dispatch(action.fetchTodos()), []);
 
     return (
         <>
@@ -34,24 +35,4 @@ const TodoList = ({ todos, postTodos, fetchTodos }) => {
     );
 };
 
-function mapStateToProps(state) {
-    return {
-        todos: state.todos
-    };
-}
-
-TodoList.propTypes = {
-    todos: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            text: PropTypes.string.isRequired
-        }).isRequired
-    ).isRequired,
-    fetchTodos: PropTypes.func.isRequired,
-    postTodos: PropTypes.func.isRequired
-};
-
-export default connect(mapStateToProps, {
-    fetchTodos: action.fetchTodos,
-    postTodos: action.postTodos
-})(TodoList);
+export default TodoList;
