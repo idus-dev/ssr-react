@@ -7,6 +7,8 @@ const prefetchApi = async route => {
     const requests = Object.values(route.prefetch).map(promise => promise());
     const initialState = {};
 
+    initialState.ssr = true;
+
     return Promise.all(requests).then(res => {
         res.forEach((data, i) => {
             initialState[states[i]] = data;

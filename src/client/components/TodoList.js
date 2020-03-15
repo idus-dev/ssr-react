@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as action from '../store/action/todos';
 
+import * as action from '../store/action/todos';
 import useForm from '../hooks/useForm';
+import useInitialFetchSSR from '../hooks/useInitialFetchSSR';
 
 const TodoList = () => {
     const todos = useSelector(state => state.todos);
     const dispatch = useDispatch();
+
     const { handleSubmit, handleChange, values, errors } = useForm(() =>
         dispatch(action.postTodos(values.userInput))
     );
 
-    useEffect(() => dispatch(action.fetchTodos()), []);
+    useInitialFetchSSR(action.fetchTodos());
 
     return (
         <>

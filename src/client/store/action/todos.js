@@ -1,5 +1,7 @@
 import api from '../../api';
 
+export const hydrated = () => ({ type: 'HYDRATED' });
+
 export const fetchTodosAction = payload => ({
     type: 'FETCH_TODOS',
     payload
