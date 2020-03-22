@@ -34,13 +34,13 @@
 build image
 
 ``` shell
-docker build -t 7ylee/ssr-react .
+docker build -t idus/ssr-react .
 ```
 
 run image
 
 ``` shell
-docker run -p ${PORT}:8080 --name ssr-react -d 7ylee/ssr-react
+docker run -p ${PORT}:8080 --name ssr-react -d idus/ssr-react
 ```
 
 ### favicons
