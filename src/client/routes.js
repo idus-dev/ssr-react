@@ -9,7 +9,7 @@ const routes = [
         name: 'todos list',
         exact: true,
         component: Todos,
-        prefetch: {
+        preloadState: {
             todos: () => api.todos.list()
         }
     }

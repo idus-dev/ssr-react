@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as action from '../store/action/todos';
+import { HYDRATED } from '../store/action/types';
+
+// hydrated action
+const hydrated = () => ({ type: HYDRATED });
 
 const useInitialFetchSSR = fetchAction => {
     const ssr = useSelector(state => state.ssr);
@@ -8,7 +11,7 @@ const useInitialFetchSSR = fetchAction => {
 
     useEffect(() => {
         if (ssr) {
-            dispatch(action.hydrated());
+            dispatch(hydrated());
             return;
         }
         dispatch(fetchAction);

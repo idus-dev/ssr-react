@@ -1,14 +1,13 @@
 import api from '../../api';
-
-export const hydrated = () => ({ type: 'HYDRATED' });
+import { FETCH_TODOS, POST_TODOS } from './types';
 
 export const fetchTodosAction = payload => ({
-    type: 'FETCH_TODOS',
+    type: FETCH_TODOS,
     payload
 });
 
 export const postTodosAction = payload => ({
-    type: 'POST_TODOS',
+    type: POST_TODOS,
     payload
 });
 

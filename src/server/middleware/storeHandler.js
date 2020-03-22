@@ -3,8 +3,10 @@ import { createStore } from 'redux';
 import rootReducer from '../../client/store/reducers/rootReducer';
 
 const prefetchApi = async route => {
-    const states = Object.keys(route.prefetch);
-    const requests = Object.values(route.prefetch).map(promise => promise());
+    const states = Object.keys(route.preloadState);
+    const requests = Object.values(route.preloadState).map(promise =>
+        promise()
+    );
     const initialState = {};
 
     initialState.ssr = true;
@@ -18,7 +20,7 @@ const prefetchApi = async route => {
 };
 
 export default async route => {
-    const preloadedState = route.prefetch ? await prefetchApi(route) : {};
+    const preloadedState = route.preloadState ? await prefetchApi(route) : {};
 
     return createStore(rootReducer, preloadedState);
 };
