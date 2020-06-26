@@ -5,6 +5,8 @@ WORKDIR /usr/src/app
 
 # ENV
 ENV SECRET=production_secret
+ENV PORT=8080
+ENV DOMAIN=localhost
 
 # Install app dependencies
 COPY package*.json ./

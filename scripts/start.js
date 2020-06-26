@@ -1,19 +1,28 @@
-const express = require('express');
-const path = require('path');
-const clearConsole = require('react-dev-utils/clearConsole');
-const openBrowser = require('react-dev-utils/openBrowser');
 const { prepareUrls } = require('react-dev-utils/WebpackDevServerUtils');
+const clearConsole = require('react-dev-utils/clearConsole');
+const express = require('express');
+const dotenv = require('dotenv');
+const fs = require('fs');
+const https = require('https');
+const openBrowser = require('react-dev-utils/openBrowser');
+const path = require('path');
 const applyDevMiddleware = require('./utils/applyDevMiddleware');
 const purgeCacheOnChange = require('./utils/purgeCacheOnChange');
 
-const server = express();
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const isInteractive = process.stdout.isTTY;
-const port = isDevelopment ? 3000 : 3030;
-const host = isDevelopment ? 'localhost' : 'localhost';
-const urls = prepareUrls('http', host, port);
 
-if (isDevelopment) applyDevMiddleware(server);
+// if (process.env.NODE_ENV !== 'production')
+let server = express();
+
+if (isDevelopment) {
+    dotenv.config({ path: '.env.local' });
+    applyDevMiddleware(server);
+}
+
+const host = process.env.DOMAIN || 'localhost';
+let port = process.env.PORT || 3000;
+let protocol = 'http';
 
 server.use((req, res) => {
     // We use "require" inside this function
@@ -28,8 +37,26 @@ server.use((req, res) => {
     app(req, res);
 });
 
+// development ssl 설정
+if (isDevelopment) {
+    try {
+        const privateKey = fs.readFileSync(`./${host}-key.pem`);
+        const certificate = fs.readFileSync(`./${host}.pem`);
+        const credentials = { key: privateKey, cert: certificate };
+        const devHttpsServer = https.createServer(credentials, server);
+
+        port = 443;
+        protocol = 'https';
+        server = devHttpsServer;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 server.listen(port, () => {
     if (isDevelopment) {
+        const urls = prepareUrls(protocol, host, port);
+
         if (isInteractive) clearConsole();
         openBrowser(urls.localUrlForBrowser);
         purgeCacheOnChange(path.resolve(__dirname, '../'));
