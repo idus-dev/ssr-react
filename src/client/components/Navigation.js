@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
-import routes from '../routes';
 
 const LinkStyle = styled(NavLink)`
     color: #999;
@@ -23,11 +22,12 @@ const NavStyle = styled.nav`
 
 const Navigation = () => (
     <NavStyle>
-        {routes.map(({ name, path }) => (
-            <LinkStyle exact key={name} to={path}>
-                {name}
-            </LinkStyle>
-        ))}
+        <LinkStyle exact to="/">
+            Main
+        </LinkStyle>
+        <LinkStyle exact to="/todos">
+            Todos
+        </LinkStyle>
     </NavStyle>
 );
 

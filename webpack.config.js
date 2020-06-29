@@ -44,9 +44,7 @@ module.exports = {
         alias: {}
     },
     plugins: [
-        new webpack.DefinePlugin({
-            __isBrowser__: 'true'
-        }),
+        new webpack.DefinePlugin({ 'process.env.IS_BROWSER': 'true' }),
         new Dotenv({
             path: path.resolve(process.cwd(), '.env.local')
         }),

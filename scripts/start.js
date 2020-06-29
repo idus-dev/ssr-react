@@ -12,7 +12,6 @@ const purgeCacheOnChange = require('./utils/purgeCacheOnChange');
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const isInteractive = process.stdout.isTTY;
 
-// if (process.env.NODE_ENV !== 'production')
 let server = express();
 
 if (isDevelopment) {

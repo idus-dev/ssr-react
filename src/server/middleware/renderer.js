@@ -8,7 +8,8 @@ import React from 'react';
 import branch from 'git-branch';
 
 import App from '../../client/App';
-import storeHandler from './storeHandler';
+import initialStateHandler from './initialStateHandler';
+import initialDataHandler from './initialDataHandler';
 
 const templatePath = process.env.NODE_ENV === 'production' ? 'build' : 'dev';
 const filePath = `./${templatePath}/app-shell.html`;
@@ -18,13 +19,14 @@ const branchLabel =
         : '';
 
 export default activeRoute => async (req, res, next) => {
-    const store = await storeHandler(activeRoute);
+    const store = await initialStateHandler(activeRoute);
+    const initialData = await initialDataHandler(activeRoute, req);
     const sheet = new ServerStyleSheet();
     const helmet = Helmet.renderStatic();
     const html = renderToString(
         sheet.collectStyles(
             <Provider store={store}>
-                <StaticRouter location={req.url}>
+                <StaticRouter location={req.url} context={initialData}>
                     <App />
                 </StaticRouter>
             </Provider>
@@ -39,10 +41,17 @@ export default activeRoute => async (req, res, next) => {
                 .replace('<title></title>', helmet.title.toString())
                 .replace('<style></style>', sheet.getStyleTags())
                 .replace(
-                    '__PRELOADED_STATE__ = {};',
-                    `__PRELOADED_STATE__ = ${JSON.stringify(
+                    '__INITIAL_STATE__ = {};',
+                    `__INITIAL_STATE__ = ${JSON.stringify(
                         store.getState()
                     ).replace(/</g, '\\u003c')}`
+                )
+                .replace(
+                    '__INITIAL_DATA__ = {};',
+                    `__INITIAL_DATA__ = ${JSON.stringify(initialData).replace(
+                        /</g,
+                        '\\u003c'
+                    )}`
                 )
                 .replace(
                     '<div id="app"></div>',
