@@ -1,5 +1,9 @@
 {
     "extends": [
         "idus"
-    ]
+    ],
+    "globals": {
+        "__INITIAL_STATE__": true,
+        "__INITIAL_DATA__": true,
+    }
 }

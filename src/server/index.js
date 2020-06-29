@@ -6,7 +6,7 @@ import express from 'express';
 import { logger, accessLogger } from './middleware/logger';
 import renderer from './middleware/renderer';
 import errorHandler from './middleware/errorHandler';
-import routes from '../client/routes';
+import ssrRoutes from './ssrRoutes';
 import todoRoutes from './api/todoRoutes';
 
 // use docker ENV for production
@@ -42,7 +42,8 @@ app.use(todoRoutes());
 
 // renderer
 app.get('*', (req, res, next) => {
-    const activeRoute = routes.find(route => matchPath(req.url, route)) || {};
+    const activeRoute =
+        ssrRoutes.find(route => matchPath(req.url, route)) || {};
     renderer(activeRoute)(req, res, next);
 });
 

@@ -4,7 +4,8 @@ import React from 'react';
 import ResetCSS from './components/ResetCSS';
 import Navigation from './components/Navigation';
 import NoMatch from './pages/NoMatch';
-import routes from './routes';
+import ssrRoutes from '../server/ssrRoutes';
+import Main from './pages/Main';
 
 const App = () => (
     <main>
@@ -12,7 +13,9 @@ const App = () => (
         <Navigation />
         {/* eslint-disable react/jsx-props-no-spreading */}
         <Switch>
-            {routes.map(({ path, exact, component: C, ...rest }) => (
+            <Route path="/" exact component={Main} />
+            {/* routes that requires serverside rendering */}
+            {ssrRoutes.map(({ path, exact, component: C, ...rest }) => (
                 <Route
                     key={path}
                     path={path}

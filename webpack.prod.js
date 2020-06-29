@@ -64,7 +64,7 @@ const client = {
         new Dotenv({
             path: path.resolve(process.cwd(), '.env.production')
         }),
-        new webpack.DefinePlugin({ __isBrowser__: 'true' }),
+        new webpack.DefinePlugin({ 'process.env.IS_BROWSER': 'true' }),
         new HtmlWebpackPlugin({
             template: 'src/client/app-shell.html',
             filename: 'app-shell.html',
