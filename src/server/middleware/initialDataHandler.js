@@ -1,6 +1,6 @@
 const prefetchApi = async (route, req) => {
-    const keys = Object.keys(route.prefetch);
-    const requests = Object.values(route.prefetch).map(promise => {
+    const keys = Object.keys(route.initialData);
+    const requests = Object.values(route.initialData).map(promise => {
         // TODO : make this more flexible
         if (route.path === '/notes/:id') {
             const split = req.url.split('/');
@@ -26,6 +26,8 @@ const prefetchApi = async (route, req) => {
 };
 
 export default async (route, req) => {
-    const preloadedState = route.prefetch ? await prefetchApi(route, req) : {};
+    const preloadedState = route.initialData
+        ? await prefetchApi(route, req)
+        : {};
     return preloadedState;
 };
