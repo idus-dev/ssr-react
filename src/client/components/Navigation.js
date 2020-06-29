@@ -28,6 +28,9 @@ const Navigation = () => (
         <LinkStyle exact to="/todos">
             Todos
         </LinkStyle>
+        <LinkStyle exact to="/prefetch">
+            Prefetch Example
+        </LinkStyle>
     </NavStyle>
 );
 
