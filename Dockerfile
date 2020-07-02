@@ -1,20 +1,20 @@
-FROM node:8.14.0-alpine
+FROM node:dubnium-alpine
 
 # Create app directory
 WORKDIR /usr/src/app
 
 # ENV
-ENV SECRET=production_secret
-ENV PORT=8080
-ENV DOMAIN=localhost
+ENV SECRET=production_secret \
+    PORT=8080\
+    DOMAIN=localhost
 
 # Install app dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --silent
 
 # Bundle app source
 COPY . .
-RUN npm run build
+RUN npm run --silent build
 
 EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "production" ]
