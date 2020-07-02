@@ -41,13 +41,13 @@ export default activeRoute => async (req, res, next) => {
                 .replace('<title></title>', helmet.title.toString())
                 .replace('<style></style>', sheet.getStyleTags())
                 .replace(
-                    '__INITIAL_STATE__ = {};',
+                    '__INITIAL_STATE__ = null;',
                     `__INITIAL_STATE__ = ${JSON.stringify(
                         store.getState()
                     ).replace(/</g, '\\u003c')}`
                 )
                 .replace(
-                    '__INITIAL_DATA__ = {};',
+                    '__INITIAL_DATA__ = null;',
                     `__INITIAL_DATA__ = ${JSON.stringify(initialData).replace(
                         /</g,
                         '\\u003c'

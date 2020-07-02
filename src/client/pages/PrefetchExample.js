@@ -8,19 +8,20 @@ const PrefetchExample = ({ staticContext }) => {
     const [list, setList] = useState(() => {
         let data = staticContext ? staticContext.todos : [];
 
-        if (
-            process.env.IS_BROWSER === true &&
-            Object.keys(__INITIAL_DATA__).length !== 0
-        ) {
+        // 컨디션 공통으로 뺼지 ?
+        // - __INITIAL_DATA__ = null : 초기 값
+        // - process.env.IS_BROWSER 서버 & 브라우져 구분 값 (서버에선 window.__INITIAL_DATA__ 접근 못함 )
+        if (process.env.IS_BROWSER === true && __INITIAL_DATA__ !== null) {
             data = __INITIAL_DATA__.todos;
-            __INITIAL_DATA__ = {};
         }
 
         return data;
     });
 
     useEffect(() => {
-        if (Object.keys(list).length === 0) {
+        // __INITIAL_DATA__ === null
+        // 서버에서 내려준 값 없을때 (클라이언트에서 마운트 됬을떄)
+        if (__INITIAL_DATA__ === null) {
             api.todos
                 .list()
                 .then(res => {

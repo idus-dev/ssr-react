@@ -42,6 +42,26 @@ mkcert localhost # 인증서 & 인증 키 생성 - `process.env.DOMAIN` 값을 �
 
 > localhost는 예제 입니다. `process.env.DOMAIN` 값을 넣어 주세요
 
+### SSR 관련 중요 상수 값
+
+#### `process.env.IS_BROWSER`
+
+- webpack 빌드타임에 클라언트 번들에 추가되는 환경변수.
+- 클라언트 `<App/>` 이 서버에서 먼저 렌더링 되기 때문에, 서버/클라이언트 환경에 따라 컴포넌트 로직 분기를 위해 추가된 플래그
+- 서버에선 없는 값.
+
+#### `window.__INITIAL_DATA__`
+
+- `app-shell.html` 에 `null` 값으로 초기화
+- 데이터를 직접 요청하는 컴포넌트에서, 서버 렌더링시 응답을 임시로 저장하는 글로벌 객체.
+- 컴포넌트 내부에서 `window.__INITIAL_DATA__` 에 접근해서, 컴포넌트 초기 상태값으로 사용
+
+#### `window.__INITIAL_STATE__`
+
+- `app-shell.html` 에 `null` 값으로 초기화
+- 서버 렌더링시, store 상태를 미리 요청해서 임시 저장해두는 글로벌 객체
+- `store/index.js` 에서 `window.__INITIAL_STATE__` 접근해서 초기 스토어를 만들때, `preloadState로 추가함`
+
 ---
 
 ## TODO LIST

@@ -134,8 +134,7 @@ const server = {
                 use: 'file-loader?name=./assets/images/[name].[ext]'
             }
         ]
-    },
-    plugins: [new webpack.DefinePlugin({ __isBrowser__: 'false' })]
+    }
 };
 
 module.exports = [client, server];
