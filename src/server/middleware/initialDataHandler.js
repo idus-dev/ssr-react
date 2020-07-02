@@ -28,6 +28,6 @@ const prefetchApi = async (route, req) => {
 export default async (route, req) => {
     const preloadedState = route.initialData
         ? await prefetchApi(route, req)
-        : {};
+        : null;
     return preloadedState;
 };
