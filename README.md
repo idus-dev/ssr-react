@@ -37,12 +37,12 @@ mkcert -install # local CA 생성
 mkcert localhost # 인증서 & 인증 키 생성 - `process.env.DOMAIN` 값을 넣어 주세요
 ```
 
-- 프로젝트 루트에 `localhost.pem` & `localh₩ost-key.pem` 이 생성 됩니다.
+- 프로젝트 루트에 `localhost.pem` & `localhost-key.pem` 이 생성 됩니다.
 - *.pem 파일은 `.gitignore`에 추가 되어있습니다.
 
 > localhost는 예제 입니다. `process.env.DOMAIN` 값을 넣어 주세요
 
-### SSR 관련 중요 상수 값
+### SSR 관련 중요 상수
 
 #### `process.env.IS_BROWSER`
 
