@@ -3,11 +3,6 @@ FROM node:dubnium-alpine
 # Create app directory
 WORKDIR /usr/src/app
 
-# ENV
-ENV SECRET=production_secret \
-    PORT=8080\
-    DOMAIN=localhost
-
 # Install app dependencies
 COPY package*.json ./
 RUN npm install --silent

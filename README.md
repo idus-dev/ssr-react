@@ -1,29 +1,35 @@
 # SSR with React
 
-## development 설정
+## Configs
 
-### 로컬 환경 변수 설정 .env.local
+### 로컬 환경 변수 .env.local
+
+- 웹팩 빌드타임에, `*클라이언트 번들*` 에 추가되는 변수들.
 
 버전 컨트롤에서 제외된 파일입니다.  \
 해당 파일이 없으면 프로젝트 루트에 `.env.local` 파일을 생성합니다.
 
 ``` bash
-PORT=80
+PORT=3111
 DOMAIN=localhost
 API_ENDPOINT=http://localhost
 ```
 
-- `PORT=80` # 개발 환경 포트 (default 3000)
+- `PORT=3111` # 개발 환경 포트 (default 3000)
 - `DOMAIN=localhost` # 개발환경 도메인 설정
 - `API_ENDPOINT=http://localhost` # 사용 할 endpoint (배포 환경별로 다를수있어 분리)
 
-> `start.js`에서 환경 변수값이 없을시 디폴트값이 추가됩니다.
+> `start.js`에서 환경 변수값이 없을시 디폴트로 설정
 
 ``` js
 // scripts/start.js
 const host = process.env.DOMAIN || 'localhost';
 let port = process.env.PORT || 3000;
 ```
+
+### 프로덕션 환경 변수 .env.production
+
+`.env.local` 의 프로덕션 값들입니다.
 
 ### HTTPS 설정 (development only)
 
@@ -41,6 +47,10 @@ mkcert localhost # 인증서 & 인증 키 생성 - `process.env.DOMAIN` 값을 �
 - *.pem 파일은 `.gitignore`에 추가 되어있습니다.
 
 > localhost는 예제 입니다. `process.env.DOMAIN` 값을 넣어 주세요
+
+---
+
+## Development
 
 ### SSR 관련 중요 상수
 
@@ -71,7 +81,7 @@ mkcert localhost # 인증서 & 인증 키 생성 - `process.env.DOMAIN` 값을 �
 - [x] webpack: dev server & hot reload
 - [x] webpack: production & development configs
 - [ ] testing jest & enzyme
-- [x] add polyfills & support IE9
+- ~~[ ] add polyfills & support IE9~~ 필요할때 core-js설치
 - [x] docker container
 
 ### Clientside
@@ -104,7 +114,7 @@ docker build -t idus/ssr-react .
 run image
 
 ``` shell
-docker run -p ${PORT}:8080 --name ssr-react -d idus/ssr-react
+docker run -p ${브라우저에서-접근할-PORT}:8080 --name ssr-react -d idus/ssr-react
 ```
 
 ### favicons
