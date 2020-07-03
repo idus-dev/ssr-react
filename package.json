@@ -21,7 +21,7 @@
     "development": "npm run webpack:dev & NODE_ENV=development babel-node scripts/start.js",
     "build": "rm -rf ./build && webpack --config webpack.prod.js",
     "docker:build": "docker build --rm -t tylee/ssr-react .",
-    "docker:start": "docker run --rm -it -p 8080:80 tylee/ssr-react",
+    "docker:start": "docker run --rm -it -p 80:8080 tylee/ssr-react",
     "docker": "npm run docker:build && npm run docker:start"
   },
   "dependencies": {

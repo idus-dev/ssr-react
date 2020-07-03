@@ -17,6 +17,8 @@ let server = express();
 if (isDevelopment) {
     dotenv.config({ path: '.env.local' });
     applyDevMiddleware(server);
+} else {
+    dotenv.config({ path: '.env.production' });
 }
 
 const host = process.env.DOMAIN || 'localhost';
