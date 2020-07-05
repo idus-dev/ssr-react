@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { NavLink } from 'react-router-dom';
 import * as action from '../store/action/todos';
 import useForm from '../hooks/useForm';
 import useInitialFetchSSR from '../hooks/useInitialFetchSSR';
@@ -19,7 +20,9 @@ const TodoList = () => {
         <>
             <ul>
                 {todos.map(({ id, text }) => (
-                    <li key={id}>{text}</li>
+                    <li key={id}>
+                        <NavLink to={`/todos/${id}`}>{text}</NavLink>
+                    </li>
                 ))}
             </ul>
             <form onSubmit={handleSubmit}>
