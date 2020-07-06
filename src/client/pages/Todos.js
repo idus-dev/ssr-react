@@ -2,16 +2,17 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import TodoList from '../components/TodoList';
+import { Text, Layout } from '../styled';
 
 const Todos = () => (
-    <div>
+    <Layout.Container>
         <Helmet>
             <title>My App | Todo List Page</title>
             <meta name="description" content="Todo List Page" />
         </Helmet>
-        <h1>TODO LIST</h1>
+        <Text.SubTitle>TODO LIST</Text.SubTitle>
         <TodoList />
-    </div>
+    </Layout.Container>
 );
 
 export default Todos;

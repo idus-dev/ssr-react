@@ -8,7 +8,8 @@ const LinkStyle = styled(NavLink)`
 
 const NavStyle = styled.nav`
     padding: 0;
-    margin: 0;
+    width: 680px;
+    margin: 0 auto;
 
     > ${LinkStyle} {
         display: inline-block;
@@ -26,10 +27,7 @@ const Navigation = () => (
             Main
         </LinkStyle>
         <LinkStyle exact to="/todos">
-            Todos
-        </LinkStyle>
-        <LinkStyle exact to="/prefetch">
-            Prefetch Example
+            Dummy List
         </LinkStyle>
     </NavStyle>
 );
