@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import api from '../api';
 
+import { Text, Layout } from '../styled';
+
 const Page = ({ staticContext }) => {
     const { id } = useParams();
     const [content, setContent] = useState(() => {
@@ -28,10 +30,10 @@ const Page = ({ staticContext }) => {
     }, []);
 
     return (
-        <div>
-            <h1>Page</h1>
+        <Layout.Container>
+            <Text.SubTitle>DETAIL PAGE</Text.SubTitle>
             <p>{content}</p>
-        </div>
+        </Layout.Container>
     );
 };
 
