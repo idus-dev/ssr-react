@@ -1,6 +1,6 @@
 {
     "extends": [
-        "7ylee"
+        "idus"
     ],
     "globals": {
         "__INITIAL_STATE__": true,

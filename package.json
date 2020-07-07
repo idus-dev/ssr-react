@@ -7,11 +7,11 @@
     "ssr",
     "react"
   ],
-  "author": "tylee",
+  "author": "idus",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/7ylee/ssr-react.git"
+    "url": "https://github.com/idus-dev/ssr-react.git"
   },
   "scripts": {
     "lint": "eslint src",
@@ -20,8 +20,8 @@
     "production": "NODE_ENV=production node scripts/start.js",
     "development": "npm run webpack:dev & NODE_ENV=development babel-node scripts/start.js",
     "build": "rm -rf ./build && webpack --config webpack.prod.js",
-    "docker:build": "docker build --rm -t tylee/ssr-react .",
-    "docker:start": "docker run --rm -it -p 80:8080 tylee/ssr-react",
+    "docker:build": "docker build --rm -t idus/ssr-react .",
+    "docker:start": "docker run --rm -it -p 80:8080 idus/ssr-react",
     "docker": "npm run docker:build && npm run docker:start"
   },
   "dependencies": {
@@ -41,10 +41,8 @@
     "chokidar": "^3.3.1",
     "compression-webpack-plugin": "^3.1.0",
     "dotenv": "^8.2.0",
-    "dotenv-webpack": "^1.7.0",
-    "eslint": "^6.8.0",
-    "eslint-config-7ylee": "0.0.2",
     "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-idus": "0.0.1",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.20.1",

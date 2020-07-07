@@ -108,13 +108,13 @@ mkcert localhost # 인증서 & 인증 키 생성 - `process.env.DOMAIN` 값을 �
 build image
 
 ``` shell
-docker build -t 7ylee/ssr-react .
+docker build -t idus/ssr-react .
 ```
 
 run image
 
 ``` shell
-docker run -p ${브라우저에서-접근할-PORT}:8080 --name ssr-react -d 7ylee/ssr-react
+docker run -p ${브라우저에서-접근할-PORT}:8080 --name ssr-react -d idus/ssr-react
 ```
 
 ### favicons
