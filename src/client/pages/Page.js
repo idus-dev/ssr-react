@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
-import api from '../api';
 
+import TodoList from '../components/TodoList';
+import api from '../api';
 import { Text, Layout } from '../styled';
 
 const Page = ({ staticContext }) => {
     const { id } = useParams();
-    const [content, setContent] = useState(() => {
+    const [pageData, setPageData] = useState(() => {
         let data = staticContext ? staticContext.todo : {};
 
         if (process.env.IS_BROWSER === true && __INITIAL_DATA__ !== null) {
@@ -15,32 +17,50 @@ const Page = ({ staticContext }) => {
             __INITIAL_DATA__ = null;
         }
 
-        return data.text;
+        return data;
     });
 
     useEffect(() => {
+        // TODO: block fetching on hydration
         api.todos
             .detail(id)
             .then(res => {
-                setContent(res.text);
+                setPageData(res);
             })
             .catch(err => {
                 throw new Error(err);
             });
-    }, []);
+    }, [id]);
 
     return (
-        <Layout.Container>
-            <Text.SubTitle>DETAIL PAGE</Text.SubTitle>
-            <p>{content}</p>
-        </Layout.Container>
+        <>
+            <Helmet>
+                <title>My App | {pageData.title}</title>
+                <meta name="description" content={pageData.content} />
+            </Helmet>
+            <Layout.Container>
+                <Text.SubTitle>{pageData.title}</Text.SubTitle>
+                <p>{pageData.content}</p>
+                <br />
+                <hr />
+                <Text.SubTitle as="h4">Other Posts</Text.SubTitle>
+
+                <TodoList hide={id} />
+
+                <br />
+                <NavLink to="/todos">
+                    <em>↩</em>&nbsp;&nbsp;&nbsp;To List
+                </NavLink>
+            </Layout.Container>
+        </>
     );
 };
 
 Page.propTypes = {
     staticContext: PropTypes.shape({
         todo: PropTypes.shape({
-            text: PropTypes.string
+            title: PropTypes.string,
+            content: PropTypes.string
         })
     })
 };
@@ -48,7 +68,8 @@ Page.propTypes = {
 Page.defaultProps = {
     staticContext: {
         todo: {
-            text: 'loading...'
+            title: '',
+            content: 'loading...'
         }
     }
 };

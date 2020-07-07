@@ -1,5 +1,4 @@
 import Todos from '../client/pages/Todos';
-import PrefetchExample from '../client/pages/PrefetchExample';
 import Page from '../client/pages/Page';
 
 import api from '../client/api';
@@ -17,17 +16,15 @@ const ssrRoutes = [
         path: '/todos/:id',
         exact: true,
         component: Page,
+        // 렌더링 전에 필요한 가져와야할 초기 데이터
         initialData: {
             todo: id => {
                 return api.todos.detail(id);
             }
-        }
-    },
-    {
-        path: '/prefetch',
-        exact: true,
-        component: PrefetchExample,
-        initialData: {
+        },
+        // 초기 렌더링시 필요한 스토어 데이터
+        initialState: {
+            // state name => action api
             todos: () => api.todos.list()
         }
     }

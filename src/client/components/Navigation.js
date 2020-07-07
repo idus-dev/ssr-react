@@ -27,7 +27,7 @@ const Navigation = () => (
             Main
         </LinkStyle>
         <LinkStyle exact to="/todos">
-            Dummy List
+            Todo List
         </LinkStyle>
     </NavStyle>
 );

@@ -1,20 +1,28 @@
 import { useState, useEffect } from 'react';
-
+// TODO: redo validation logics
 const validate = values => {
     const errors = {};
 
-    if (!values.userInput) {
-        errors.userInput = 'cant be empty';
-    } else if (values.userInput.length < 5) {
-        errors.userInput = 'more than 5 chars requried';
+    if (!values.textTitle) {
+        errors.textTitle = 'cant be empty';
+    } else if (values.textTitle.length < 5) {
+        errors.textTitle = 'more than 5 chars requried';
+    }
+
+    if (!values.textContent) {
+        errors.textContent = 'cant be empty';
+    } else if (values.textContent.length < 5) {
+        errors.textContent = 'more than 5 chars requried';
     }
 
     return errors;
 };
 
 const useForm = callback => {
+    // TODO: 필드 자동으로 생성 하게 수정
     const fields = {
-        userInput: ''
+        textTitle: '',
+        textContent: ''
     };
 
     const [values, setValues] = useState(fields);
