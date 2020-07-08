@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Ui } from '../styled';
 import * as action from '../store/action/todos';
-import useInitialFetchSSR from '../hooks/useInitialFetchSSR';
+import useEffectSSR from '../hooks/useEffectSSR';
 
 const TodoList = ({ hide }) => {
     const todos = useSelector(state => state.todos);
+    const dispatch = useDispatch();
 
-    useInitialFetchSSR(action.fetchTodos());
+    useEffectSSR(() => {
+        dispatch(action.fetchTodos());
+    }, []);
 
     return (
         <>

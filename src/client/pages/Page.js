@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 
+import useEffectSSR, { getInitalData } from '../hooks/useEffectSSR';
 import TodoList from '../components/TodoList';
 import api from '../api';
 import { Text, Layout } from '../styled';
 
 const Page = ({ staticContext }) => {
     const { id } = useParams();
-    const [pageData, setPageData] = useState(() => {
-        let data = staticContext ? staticContext.todo : {};
 
-        if (process.env.IS_BROWSER === true && __INITIAL_DATA__ !== null) {
-            data = __INITIAL_DATA__.todo;
-            __INITIAL_DATA__ = null;
-        }
+    const [pageData, setPageData] = useState(
+        getInitalData(staticContext, 'todo')
+    );
 
-        return data;
-    });
-
-    useEffect(() => {
-        // TODO: block fetching on hydration
+    useEffectSSR(() => {
         api.todos
             .detail(id)
             .then(res => {
