@@ -3,7 +3,7 @@ import { useParams, NavLink } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 
-import useEffectSSR, { getInitalData } from '../hooks/useEffectSSR';
+import useEffectSSR, { getInitalState } from '../hooks/useEffectSSR';
 import TodoList from '../components/TodoList';
 import api from '../api';
 import { Text, Layout } from '../styled';
@@ -12,7 +12,7 @@ const Page = ({ staticContext }) => {
     const { id } = useParams();
 
     const [pageData, setPageData] = useState(
-        getInitalData(staticContext, 'todo')
+        getInitalState(staticContext, 'todo')
     );
 
     useEffectSSR(() => {
