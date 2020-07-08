@@ -23,12 +23,21 @@ const useEffectSSR = (fn, watch) => {
     }, watch || []);
 };
 
-// __INITIAL_DATA__ 를 서버에서 가져올시
-export const getInitalData = (staticContext, key) => {
+// 컴포넌트 useState 초기 스테이트 설정 함수
+// - staticContext: <StaticRouter> 의 context 프로퍼티 <StaticRouter context={initialData}>
+// - key: staticContext 에서 가져올 데이터의 키
+export const getInitalState = (staticContext, key) => {
+    // 서버에서 렌더링 할땐 - staticContext로 부터 초기 state 데이터를 가져옴.
     let data = staticContext[key] || {};
 
+    // after hydration & before render
+    // 클라이언트에서 렌더링 할땐, __INITIAL_DATA__ 에서 필요한 데이터를 가져와 초기 state를 설정함.
+
+    // 브라우져 환경인지 체크 || 서버에선 무시 (window.__INTIAL_DATA__ 접근 못함);
     if (process.env.IS_BROWSER === true && __INITIAL_DATA__ !== null) {
+        // window.__INITIAL_DATA__ 서버렌더링 과정에서 받은 데이터를 임시 저장하는객체.
         data = __INITIAL_DATA__[key];
+        // null 로 초기화
         __INITIAL_DATA__ = null;
     }
 
