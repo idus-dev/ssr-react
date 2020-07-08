@@ -40,6 +40,7 @@ export default activeRoute => async (req, res, next) => {
         return res.send(
             htmlData
                 .replace('<title></title>', helmet.title.toString())
+                .replace('<meta data-helmet="meta">', helmet.meta.toString())
                 .replace('<style></style>', sheet.getStyleTags())
                 .replace(
                     '__INITIAL_STATE__ = null;',
