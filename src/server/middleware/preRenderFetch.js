@@ -54,12 +54,13 @@ const prefetchData = async (route, req) => {
 };
 
 export default async (route, req) => {
+    // TODO: avoid fetching both asyncronously || Performance issue
     const initialData = route.initialData
         ? await prefetchData(route, req)
         : null;
     const initialState = route.initialState
         ? await prefetchState(route, req)
-        : {};
+        : { ssr: true }; // 서버에서 렌더시 디플트로 ssr flag true 로 변경 (useEffectSSR) 에서 ssr 플래그 확인
 
     return {
         initialData,
